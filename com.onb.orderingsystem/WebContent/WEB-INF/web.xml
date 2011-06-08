@@ -17,4 +17,13 @@
     <servlet-name>homepage</servlet-name>
     <url-pattern>/homepage</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <description></description>
+    <servlet-name>CreateOrder</servlet-name>
+    <servlet-class>controller.CreateOrder</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateOrder</servlet-name>
+    <url-pattern>/CreateOrder</url-pattern>
+  </servlet-mapping>
 </web-app>
