@@ -11,9 +11,15 @@
 	<center>
 		<img>
 		<p> Select a service:</p>
+<<<<<<< HEAD
 		<a href = "createOrder.jsp">Create An Order</a> <br>
 		<a href = "payment.jsp">Pay an Order</a><br>
 		<a href = "orderHistory.jsp">View Order History</a>
+=======
+		<a href = "CreateOrder">Create An Order</a> <br>
+		<a href = "">Pay an Order</a><br>
+		<a href = "">View Order History</a>
+>>>>>>> Modified the servlet and xml
 		
 		
 	</center>
