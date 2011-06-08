@@ -17,9 +17,9 @@ public class TestCustomerService {
 		
 		Customer customer = new Customer(2, "yasah");
 		
-		customer.setFirstName("yasah");
-		customer.setLastName("loresco");
-		customer.setMiddleName("frialde");
+		customer.setFirstName("thea");
+		customer.setLastName("ajes");
+		customer.setMiddleName("hernandez");
 		customerDao.createCustomer(customer);
 		
 	}
