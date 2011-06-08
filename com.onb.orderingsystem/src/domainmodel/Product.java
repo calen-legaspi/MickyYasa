@@ -1,19 +1,28 @@
-package domain;
+package domainmodel;
 
 import java.math.BigDecimal;
 
 public class Product {
-	final int skuNumber;
-	final String name;
-	BigDecimal price;
+
+	private int skuNumber;
+	private String name;
+	private BigDecimal price;
 	
 	public Product(int skuNumber, String name, BigDecimal price){
+		if(skuNumber <0)
+			throw new IllegalArgumentException("skuNumber is less than 0. skuNumber should be greater or equal to than 0.");
+		else if (name== null)
+			throw new NullPointerException("name has no value");
+		else if (name.isEmpty())
+			throw new IllegalArgumentException("name string is empty");
+		else if (price == null)
+			throw new NullPointerException("price parameter is null");
 		this.skuNumber = skuNumber;
 		this.name = name;
 		this.price = price;
-	}
+	}	
 	
-	public int getSkuNumber(){
+	public int getSKUNumber(){
 		return skuNumber;
 	}
 	
@@ -58,4 +67,5 @@ public class Product {
 			return false;
 		return true;
 	}
+	
 }
