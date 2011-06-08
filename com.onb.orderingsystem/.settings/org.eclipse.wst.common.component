@@ -3,6 +3,7 @@
     <wb-module deploy-name="com.onb.orderingsystem">
         <wb-resource deploy-path="/" source-path="/WebContent"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <property name="context-root" value="com.onb.orderingsystem"/>
         <property name="java-output-path" value="/com.onb.orderingsystem/build/classes"/>
     </wb-module>
