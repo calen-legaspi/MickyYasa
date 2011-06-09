@@ -10,15 +10,13 @@ public class Customer {
 	private String lastName;
 	private String firstName;
 	private String middleName;
-	private String name;
 	private BigDecimal totalPaidOrders;
 	private BigDecimal totalPriceOfOrders;	
 	private Set<Order> orders;
 	
 	
-	public Customer(int id, String name){
+	public Customer(int id){
 		this.id = id;
-		this.name = name;
 		totalPaidOrders = new BigDecimal(0);
 		totalPriceOfOrders = new BigDecimal(0);
 		orders = new HashSet<Order>();
@@ -71,7 +69,7 @@ public class Customer {
 	}
 	
 	public String getName(){
-		return name;
+		return lastName+", "+firstName+" "+middleName;
 	}
 
 	@SuppressWarnings("unchecked")

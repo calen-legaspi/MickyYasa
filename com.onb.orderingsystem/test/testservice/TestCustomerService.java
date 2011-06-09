@@ -15,7 +15,7 @@ public class TestCustomerService {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("customerconfig.xml");
 		CustomerDao customerDao = (CustomerDao)ctx.getBean("CustomerDao");
 		
-		Customer customer = new Customer(2, "yasah");
+		Customer customer = new Customer(2);
 		
 		customer.setFirstName("thea");
 		customer.setLastName("ajes");

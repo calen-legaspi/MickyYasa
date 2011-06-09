@@ -18,7 +18,7 @@ public class TestCustomer {
 	
 	@Before
 	public void setUp(){
-		testCustomer = new Customer(10000,"Lena");
+		testCustomer = new Customer(10000);
 		tempOrder = new Order(testCustomer);
 		tempOrder.addItem(new OrderItem(5, new Product(555, "Pepsi", new BigDecimal("15.00"))));
 		tempOrder.addItem(new OrderItem(200, new Product(777, "Coke", new BigDecimal("15.00"))));
