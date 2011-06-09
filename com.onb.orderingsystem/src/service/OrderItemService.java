@@ -1,18 +1,15 @@
 package service;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import resultretrieval.*;
 
 import dao.OrderItemDAOInterface;
-import domainmodel.Order;
-import domainmodel.OrderItem;
-import domainmodel.Product;
+import domainmodel.*;
 
-public class OrderItemService implements OrderItemDAOInterface {
+class OrderItemService implements OrderItemDAOInterface {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override

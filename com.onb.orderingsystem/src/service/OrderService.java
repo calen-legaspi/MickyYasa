@@ -12,13 +12,13 @@ import dao.*;
 import domainmodel.*;
 
 public class OrderService implements OrderDAOInterface {
-	private	JdbcTemplate conn;
+	private	JdbcTemplate jdbcTemplate;
 	
 	@Override
 	public void addOrder(Order o) {
 		String sql = "insert into Order (Order_Number, Customer_ID, Date, Paid) values (?,?,?,?)";
 		Object[] params = new Object[]{o.getOrderNumber(), o.getCustomerID(), o.getDateofOrderCreation().getTime(), false};
-		conn.update(sql,params);
+		jdbcTemplate.update(sql,params);
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("customerconfig.xml");
 		OrderItemDAOInterface orderitemDao = (OrderItemDAOInterface)ctx.getBean("OrderItemDao");
 		for(OrderItem item:o.getItems()){
@@ -30,14 +30,14 @@ public class OrderService implements OrderDAOInterface {
 	public void payOrder(Order o) {
 		String sql = "update Order set Paid=true where Order_Number=?";
 		Object[] params = {o.getOrderNumber()};
-		conn.update(sql, params);
+		jdbcTemplate.update(sql, params);
 	}
 
 	@Override
 	public Set<Order> retrieveOrders(Customer c) {
 		String sql = "select * from Order where CustomerID = ?";
 		Object[] params = new Object[]{c.getID()};
-		List<Order> orders = conn.query(sql, params, new OrderRowMapper());
+		List<Order> orders = jdbcTemplate.query(sql, params, new OrderRowMapper());
 		Set<Order> customerOrders = new HashSet<Order>();
 		for(Order o:orders){
 			customerOrders.add(o);
@@ -45,23 +45,23 @@ public class OrderService implements OrderDAOInterface {
 		return customerOrders;
 	}
 
-	private void setConn(JdbcTemplate conn) {
-		this.conn = conn;
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	private JdbcTemplate getConn() {
-		return conn;
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
 	}
 
 	@Override
 	public Order retrieveOrder(int id) {
 		String sql = "select * from Order where Order_Number = ?";
 		Object[] params = new Object[]{id};
-		List<Order> orders = conn.query(sql, params, new OrderRowMapper());
+		List<Order> orders = jdbcTemplate.query(sql, params, new OrderRowMapper());
 		return orders.get(0);
 	}
 

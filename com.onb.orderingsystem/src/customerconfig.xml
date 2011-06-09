@@ -43,7 +43,12 @@
 			<ref bean = "jdbcTemplate" />
 		</property>
 	</bean>
-
+	
+	<bean id = "OrderDao" class = "service.OrderService">
+		<property name = "jdbcTemplate">
+			<ref bean = "jdbcTemplate" />
+		</property>
+	</bean>
 	
 	<bean id = "OrderItemDao" class = "service.OrderItemService">
 		<property name = "jdbcTemplate">
