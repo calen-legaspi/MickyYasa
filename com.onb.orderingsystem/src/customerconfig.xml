@@ -44,6 +44,11 @@
 		</property>
 	</bean>
 
+	<bean id = "InventoryDao" class = "service.InventoryService">
+		<property name = "jdbcTemplate">
+			<ref bean = "jdbcTemplate" />
+		</property>
+	</bean>
 	
 	<bean id = "OrderItemDao" class = "service.OrderItemService">
 		<property name = "jdbcTemplate">
