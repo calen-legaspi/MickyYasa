@@ -9,7 +9,7 @@
 </head>
 <body>
 	<center>
-		<img>
+		<img src="images/os.png">
 		<p> Select a service:</p>
 
 		<a href = "CreateOrder">Create An Order</a> <br>
