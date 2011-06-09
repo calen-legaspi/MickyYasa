@@ -38,8 +38,7 @@ public class ProductService implements ProductDAOInterface {
 	public Product getProduct(int id) {
 		String sql = "select * from Product p where p.SKU_Number = ?";
 		Object[] params = new Object[]{id};
-		List<Product> prodList = jdbcTemplate.query(sql, params, new ProductRowMapper());
-		return prodList.get(0);
+		return (Product)jdbcTemplate.queryForObject(sql, params, new ProductRowMapper());
 	}
 
 }
