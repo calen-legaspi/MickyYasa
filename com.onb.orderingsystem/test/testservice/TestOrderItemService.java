@@ -21,8 +21,10 @@ public class TestOrderItemService {
 		ctx = new ClassPathXmlApplicationContext("customerconfig.xml");
 		ProductDAOInterface productDao = (ProductDAOInterface)ctx.getBean("ProductDao");
 		testProduct = productDao.getProduct(10234242);
+		CustomerDAO customerDao = (CustomerDAO)ctx.getBean("CustomerDao");
+		Customer testCustomer = customerDao.retrieveCustomerList().get(0);
 		OrderDAOInterface orderDao = (OrderDAOInterface)ctx.getBean("ProductDao");
-		testOrder = orderDao.retrieveOrder();
+		testOrder = orderDao.retrieveOrder(testCustomer.getID());
 	}
 	
 	

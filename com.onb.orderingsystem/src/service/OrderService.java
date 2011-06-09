@@ -22,7 +22,7 @@ public class OrderService implements OrderDAOInterface {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("customerconfig.xml");
 		OrderItemDAOInterface orderitemDao = (OrderItemDAOInterface)ctx.getBean("OrderItemDao");
 		for(OrderItem item:o.getItems()){
-			orderitemDao.createOrderItem(item);
+			orderitemDao.createOrderItem(item, o.getOrderNumber());
 		}
 	}
 

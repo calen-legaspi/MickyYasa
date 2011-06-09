@@ -33,7 +33,6 @@ public class Order implements Comparable{
 	}
 	
 	public void addItem(OrderItem o){
-		o.setOrder(this);
 		items.add(o);
 		computeTotalCost();
 	}
@@ -74,7 +73,6 @@ public class Order implements Comparable{
 	
 	public void pay(){
 		paid = true;
-		
 	}
 	
 	public boolean hasPaid(){

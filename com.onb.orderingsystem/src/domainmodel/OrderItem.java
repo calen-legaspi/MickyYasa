@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 public class OrderItem {
 	
-	private Order order;
 	private int quantity;
 	private Product product;
 	
@@ -58,14 +57,6 @@ public class OrderItem {
 		return true;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
-	}
-
-	public int getOrderNumber() {
-		return order.getOrderNumber();
-	}
-	
 	public int getPriceSKUNumber(){
 		return product.getSKUNumber();
 	}

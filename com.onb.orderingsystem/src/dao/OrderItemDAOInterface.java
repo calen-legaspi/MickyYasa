@@ -8,7 +8,7 @@ import domainmodel.*;
 
 public interface OrderItemDAOInterface {
 	
-	public void createOrderItem(OrderItem object);
+	public void createOrderItem(OrderItem object, int orderNumber);
 
 	public List<OrderItem> getOrderItems(Order rootOrder);
 
