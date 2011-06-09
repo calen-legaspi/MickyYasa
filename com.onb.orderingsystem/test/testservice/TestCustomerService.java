@@ -7,13 +7,13 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import dao.CustomerDao;
+import dao.CustomerDAO;
 import domainmodel.Customer;
 
 
 public class TestCustomerService {
 	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("customerconfig.xml");
-	CustomerDao customerDao = (CustomerDao)ctx.getBean("CustomerDao");
+	CustomerDAO customerDao = (CustomerDAO)ctx.getBean("CustomerDao");
 	
 	@Test
 	public void testDeleteCustomer(){
