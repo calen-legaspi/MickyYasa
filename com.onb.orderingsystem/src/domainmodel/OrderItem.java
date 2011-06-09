@@ -62,8 +62,12 @@ public class OrderItem {
 		this.order = order;
 	}
 
-	public Order getOrder() {
-		return order;
+	public int getOrderNumber() {
+		return order.getOrderNumber();
+	}
+	
+	public int getPriceSKUNumber(){
+		return product.getSKUNumber();
 	}
 	
 	

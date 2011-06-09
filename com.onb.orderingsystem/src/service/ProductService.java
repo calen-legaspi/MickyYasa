@@ -3,9 +3,7 @@ package service;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
 
-import resultretrieval.ProductResultSetExtractor;
 import resultretrieval.ProductRowMapper;
 
 import dao.ProductDAOInterface;

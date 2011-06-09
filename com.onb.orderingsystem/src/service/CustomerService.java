@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -40,12 +41,32 @@ public class CustomerService implements CustomerDAO{
 		return this.getJdbcTemplate().query("select * from Customer", new CustomerRowMapper());
 	}
 	
+	public List<Customer> retrieveUnpaidCustomerList(){
+		List<Customer> customers = retrieveCustomerList();
+		List<Customer> unpaidCustomers = new ArrayList<Customer>();
+		for(Customer c:customers){
+			if(!c.getUnpaidOrders().isEmpty()){
+				unpaidCustomers.add(c);
+			}
+		}
+		return unpaidCustomers;
+	}
+	
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
 
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
+	}
+
+
+	@Override
+	public Customer retrieveCustomer(int id) {
+		String sql = "select * from Customer where Customer_ID = ?";
+		Object[] params = {id};
+		List<Customer> customerResults =  this.getJdbcTemplate().query(sql,params, new CustomerRowMapper());
+		return customerResults.get(0);
 	}
 
 		

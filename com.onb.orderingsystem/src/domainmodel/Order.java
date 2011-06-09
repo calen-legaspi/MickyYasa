@@ -21,7 +21,15 @@ public class Order implements Comparable{
 		date.clear(Calendar.MILLISECOND);		//The milliseconds variable makes one unit test fail
 		items = new ArrayList<OrderItem>();
 		paid = false;
-		System.out.println("NEW ORDER");
+	}
+	
+	public Order(int orderNumber, Customer payer, Date date, boolean paid){
+		this.orderNumber = orderNumber;
+		this.payer = payer;
+		increment++;
+		this.date.setTime(date);
+		items = new ArrayList<OrderItem>();
+		this.paid = paid;
 	}
 	
 	public void addItem(OrderItem o){
@@ -77,6 +85,10 @@ public class Order implements Comparable{
 		return orderNumber;
 	}
 	
+	public int getCustomerID(){
+		return payer.getID();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -109,6 +121,10 @@ public class Order implements Comparable{
 
 	public int getNumberofItems() {
 		return items.size();
+	}
+	
+	public void setOrderItems(List<OrderItem> items){
+		this.items = items;
 	}
 	
 	public List<OrderItem> getItems(){
