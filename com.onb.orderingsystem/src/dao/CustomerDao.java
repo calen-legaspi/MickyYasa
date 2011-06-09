@@ -1,11 +1,11 @@
 package dao;
 
-import java.util.Set;
+import java.util.List;
 
 import domainmodel.Customer;
 
 public interface CustomerDao {
 	public void createCustomer(Customer customer);
 	public void deleteCustomer(Customer customer);
-	public Set<Customer> getCustomer();
+	public List<Customer> retrieveCustomerList();
 }

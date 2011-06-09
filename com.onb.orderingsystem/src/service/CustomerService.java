@@ -1,8 +1,11 @@
 package service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import resultretrieval.CustomerRowMapper;
 
 import dao.CustomerDao;
 import domainmodel.Customer;
@@ -16,6 +19,16 @@ public class CustomerService implements CustomerDao{
 		this.getJdbcTemplate().update(sql,params);
 	}
 	
+	public void deleteCustomer(Customer customer){
+		String sql = "delete from Customer where ID = ?";
+		Object[] params = new Object[]{customer.getID()};
+		this.getJdbcTemplate().update(sql, params);
+	}
+	
+	public List<Customer> retrieveCustomerList(){
+		return this.getJdbcTemplate().query("select * from Customer", new CustomerRowMapper());
+	}
+	
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
@@ -24,19 +37,7 @@ public class CustomerService implements CustomerDao{
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-	@Override
-	public void deleteCustomer(Customer customer) {
-		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public Set<Customer> getCustomer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 
 
 }
