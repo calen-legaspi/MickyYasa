@@ -25,6 +25,7 @@ public class Order implements Comparable{
 	}
 	
 	public void addItem(OrderItem o){
+		o.setOrder(this);
 		items.add(o);
 		computeTotalCost();
 	}

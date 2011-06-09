@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class OrderItem {
 	
+	private Order order;
 	private int quantity;
 	private Product product;
 	
@@ -55,6 +56,14 @@ public class OrderItem {
 		} else if (!product.equals(other.product))
 			return false;
 		return true;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public Order getOrder() {
+		return order;
 	}
 	
 	

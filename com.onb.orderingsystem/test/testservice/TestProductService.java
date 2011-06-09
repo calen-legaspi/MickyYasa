@@ -35,7 +35,6 @@ public class TestProductService {
 	public void testGetProduct(){
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("customerconfig.xml");
 		ProductDAOInterface productDao = (ProductDAOInterface)ctx.getBean("ProductDao");
-		
 		Assert.assertTrue(productDao.getProduct(10234242).getName().equals("Coke"));
 	}
 
