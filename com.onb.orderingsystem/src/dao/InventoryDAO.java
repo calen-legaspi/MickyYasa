@@ -10,4 +10,6 @@ public interface InventoryDAO {
 	public void deleteInventoryItemFromInventory(InventoryItem inventoryItem);
 	
 	public List<InventoryItem> retrieveInventoryItemList();
+	
+	public void updateInventory(InventoryItem inventoryItem);
 }

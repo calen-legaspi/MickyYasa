@@ -70,7 +70,7 @@ UNLOCK TABLES;
 -- Definition of table `orderingsystem`.`Order`
 --
 
-DROP TABLE IF EXISTS `orderingsystem`.`Order`;
+DROP TABLE IF EXISTS `orderingsystem`.`CustomerOrder`;
 CREATE TABLE  `orderingsystem`.`Order` (
   `Order_Number` int(11) NOT NULL AUTO_INCREMENT,
   `Customer_ID` int(11) NOT NULL,

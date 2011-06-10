@@ -45,6 +45,15 @@ public class TestInventoryDAOImpl {
 		assertTrue(inventoryList.contains(inventoryItem));
 	}
 
-	
+	@Test
+	public void testUpdateInventory(){
+		Product  product = new Product(10234242, "Coke", new BigDecimal("100.00"));
+		InventoryItem inventoryItem = new InventoryItem(5, product);	
+		inventoryDao.updateInventory(inventoryItem);
+		
+		InventoryItem inventoryItem2 = new InventoryItem(100, product);
+		inventoryDao.updateInventory(inventoryItem2);
+		
+	}
 	
 }
