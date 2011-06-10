@@ -15,6 +15,7 @@
 		<br>
 		<br>
 		Product: <select name = "products" style="width: 170px; height: 32px">
+			<option value="none">Select Product</option>
 		<% List<InventoryItem> items = (List<InventoryItem>)request.getAttribute("listOfProductsInStock");
 		for(InventoryItem product : items){ %>
 			<option value="<%=product.getSKUNumber()%>"><%=product.getProductName() %></option>

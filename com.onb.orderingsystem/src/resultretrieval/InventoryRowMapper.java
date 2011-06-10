@@ -15,7 +15,6 @@ public class InventoryRowMapper implements RowMapper{
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
 		ProductDAO productDAO = (ProductDAO)ctx.getBean("ProductDao");
 		InventoryItem inventoryItem = new InventoryItem(inventoryset.getInt("Quantity"), productDAO.getProduct(inventoryset.getInt("SKU_Number")));
-		
 		return inventoryItem;
 	}
 

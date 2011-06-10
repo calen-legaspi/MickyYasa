@@ -37,7 +37,10 @@ public class ProductDAOImpl implements ProductDAO {
 	public Product getProduct(int id) {
 		String sql = "select * from Product p where p.SKU_Number = ?";
 		Object[] params = new Object[]{id};
-		return (Product)jdbcTemplate.queryForObject(sql, params, new ProductRowMapper());
+		Object product = jdbcTemplate.queryForObject(sql, params, new ProductRowMapper());
+		if(product!=null)
+			return (Product) product;
+		else return null;
 	}
 
 }

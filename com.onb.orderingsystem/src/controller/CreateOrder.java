@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import dao.*;
@@ -34,7 +35,7 @@ public class CreateOrder extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
 		InventoryDAO inventoryDao = (InventoryDAO)ctx.getBean("InventoryDao");
 		List<InventoryItem> items = inventoryDao.retrieveInventoryItemList();
 		request.setAttribute("listOfProductsInStock", items);

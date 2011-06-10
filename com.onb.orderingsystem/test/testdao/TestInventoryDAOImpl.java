@@ -21,18 +21,19 @@ public class TestInventoryDAOImpl {
 	ProductDAO productDao = (ProductDAO)ctx.getBean("ProductDao");
 	InventoryDAO inventoryDao = (InventoryDAO)ctx.getBean("InventoryDao");
 	
-	//@Test
+	@Test
 	public void testDeleteInventoryItemFromInventory(){
-		Product  product = new Product(10234242, "Coke", new BigDecimal("100.00"));
+		Product  product = new Product(10234212, "Ballpen", new BigDecimal("1.00"));
 		InventoryItem inventoryItem = new InventoryItem(10, product);
 		inventoryDao.deleteInventoryItemFromInventory(inventoryItem);
-		productDao.deleteProduct(product);
+		//productDao.deleteProduct(product);
 	}
 	
 	@Test
 	public void testAddInventoryItemToInventory(){
-		Product  product = new Product(10234242, "Coke", new BigDecimal("100.00"));
-		productDao.createProduct(product);
+		Product  product = productDao.getProduct(10234212);
+		if(product==null)
+			productDao.createProduct(new Product(10234212, "Ballpen", new BigDecimal("1.00")));
 		InventoryItem inventoryItem = new InventoryItem(10, product);
 		inventoryDao.addInventoryItemToInventory(inventoryItem);	
 	}
