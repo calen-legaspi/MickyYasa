@@ -13,12 +13,10 @@ public class CustomerService {
 	CustomerDAO customerDao = (CustomerDAO)ctx.getBean("CustomerDao");
 
 	public List<Customer> getCustomerList(){
-		List<Customer> customerList = customerDao.retrieveCustomerList();
-		return customerList;
+		return customerDao.retrieveCustomerList();
 	}
 	
 	public List<Customer> getCustomerWithUnpaidOrders(){
-		List<Customer> customerList = customerDao.retrieveUnpaidCustomerList();
-		return customerList;
+		return customerDao.retrieveUnpaidCustomerList();
 	}
 }

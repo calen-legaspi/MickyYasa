@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 
 import controller.CustomerService;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domainmodel.Customer;
-import domainmodel.Product;
 
 /**
  * Servlet implementation class CustomerServlet
@@ -38,14 +36,17 @@ public class OrderHistory extends HttpServlet {
 		if(checkParameters(request)){
 			//FIXME fill this up
 		}else{
-			CustomerService customerS = new CustomerService();
-			List<Customer> listOfCustomer = customerS.getCustomerList(); //insert service here
+			CustomerService customerService = new CustomerService();
+			List<Customer> listOfCustomer = customerService.getCustomerList(); //insert service here
 			
 			for(Customer customer : listOfCustomer){
 				System.out.println(customer.getFirstName()+" "+customer.getLastName());
 			}
 			
 			request.setAttribute("listOfCustomer", listOfCustomer);
+			
+			//int selectedCustomer = Integer.parseInt(request.getParameter("customer"));
+			
 			
 			RequestDispatcher view = request.getRequestDispatcher("orderHistory.jsp");
 			view.forward(request, response);
