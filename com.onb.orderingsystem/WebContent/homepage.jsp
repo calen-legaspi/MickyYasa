@@ -13,7 +13,7 @@
 
 		<a href = "CreateOrder">Create An Order</a> <br>
 		<a href = "">Pay an Order</a><br>
-		<a href = "">View Order History</a>
+		<a href = "OrderHistory">View Order History</a>
 
 	</center>
 </body>
