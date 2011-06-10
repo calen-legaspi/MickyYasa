@@ -2,7 +2,7 @@ package dao;
 
 import domainmodel.Product;
 
-public interface ProductDAOInterface{
+public interface ProductDAO{
 
 	public void createProduct(Product object);
 

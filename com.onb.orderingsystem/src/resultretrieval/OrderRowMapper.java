@@ -13,10 +13,10 @@ public class OrderRowMapper implements RowMapper {
 
 	@Override
 	public Object mapRow(ResultSet arg0, int arg1) throws SQLException {
-		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("customerconfig.xml");
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
 		CustomerDAO customerDao = (CustomerDAO)ctx.getBean("CustomerDao");
 		Order o = new Order(arg0.getInt("Order_Number"), customerDao.retrieveCustomer(arg0.getInt("Customer_ID")), arg0.getDate("Date"), arg0.getBoolean("Paid"));
-		OrderItemDAOInterface orderitemDAO = (OrderItemDAOInterface)ctx.getBean("OrderitemDao");
+		OrderItemDAO orderitemDAO = (OrderItemDAO)ctx.getBean("OrderitemDao");
 		o.setOrderItems(orderitemDAO.getOrderItems(o));
 		return o;
 	}

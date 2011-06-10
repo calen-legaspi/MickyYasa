@@ -4,7 +4,7 @@ import java.util.Set;
 
 import domainmodel.*;
 
-public interface OrderDAOInterface {
+public interface OrderDAO {
 
 	public void addOrder(Order o);
 	

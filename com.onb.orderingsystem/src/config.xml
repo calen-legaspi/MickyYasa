@@ -32,31 +32,31 @@
 		</property>
 	</bean >
 	
-	<bean id = "CustomerDao" class = "service.CustomerService">
+	<bean id = "CustomerDao" class = "dao.CustomerDAOImpl">
 		<property name = "jdbcTemplate">
 			<ref bean = "jdbcTemplate" />
 		</property>
 	</bean>
 	
-	<bean id = "ProductDao" class = "service.ProductService">
+	<bean id = "ProductDao" class = "dao.ProductDAOImpl">
 		<property name = "jdbcTemplate">
 			<ref bean = "jdbcTemplate" />
 		</property>
 	</bean>
 	
-	<bean id = "OrderDao" class = "service.OrderService">
+	<bean id = "OrderDao" class = "dao.OrderDAOImpl">
 		<property name = "jdbcTemplate">
 			<ref bean = "jdbcTemplate" />
 		</property>
 	</bean>
 	
-	<bean id = "InventoryDao" class = "service.InventoryService">
+	<bean id = "InventoryDao" class = "dao.InventoryDAOImpl">
 		<property name = "jdbcTemplate">
 			<ref bean = "jdbcTemplate" />
 		</property>
 	</bean>
 	
-	<bean id = "OrderItemDao" class = "service.OrderItemService">
+	<bean id = "OrderItemDao" class = "dao.OrderItemDAOImpl">
 		<property name = "jdbcTemplate">
 			<ref bean = "jdbcTemplate" />
 		</property>

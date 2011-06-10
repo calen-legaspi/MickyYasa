@@ -1,4 +1,4 @@
-package testservice;
+package testdao;
 
 import static org.junit.Assert.*;
 
@@ -8,14 +8,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import dao.CustomerDAO;
 import domainmodel.*;
 
-public class TestOrderService {
+public class TestOrderDAOImpl {
 	Customer testCustomer;
 	Order testOrder;
+	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
+	CustomerDAO customerDao = (CustomerDAO)ctx.getBean("CustomerDao");
 	
 	@Before
 	public void setUp(){
-		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("customerconfig.xml");
-		CustomerDAO customerDao = (CustomerDAO)ctx.getBean("CustomerDao");
 		testCustomer  = customerDao.retrieveCustomerList().get(0);
 		testOrder = new Order(testCustomer);
 	}

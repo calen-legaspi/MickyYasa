@@ -1,4 +1,4 @@
-package service;
+package dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +8,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import resultretrieval.CustomerRowMapper;
 
-import dao.CustomerDAO;
 import domainmodel.Customer;
 
-public class CustomerService implements CustomerDAO{
+public class CustomerDAOImpl implements CustomerDAO{
 	private JdbcTemplate jdbcTemplate;
 	
 	/**

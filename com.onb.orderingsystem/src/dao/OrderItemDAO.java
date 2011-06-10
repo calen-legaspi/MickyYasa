@@ -6,7 +6,7 @@ import java.util.Set;
 
 import domainmodel.*;
 
-public interface OrderItemDAOInterface {
+public interface OrderItemDAO {
 	
 	public void createOrderItem(OrderItem object, int orderNumber);
 

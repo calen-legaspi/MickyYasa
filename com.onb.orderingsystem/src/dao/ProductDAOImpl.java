@@ -1,4 +1,4 @@
-package service;
+package dao;
 
 import java.util.List;
 
@@ -6,10 +6,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import resultretrieval.ProductRowMapper;
 
-import dao.ProductDAOInterface;
 import domainmodel.Product;
 
-public class ProductService implements ProductDAOInterface {
+public class ProductDAOImpl implements ProductDAO {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override

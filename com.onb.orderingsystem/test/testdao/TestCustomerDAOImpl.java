@@ -1,4 +1,4 @@
-package testservice;
+package testdao;
 
 import static org.junit.Assert.*;
 
@@ -11,8 +11,8 @@ import dao.CustomerDAO;
 import domainmodel.Customer;
 
 
-public class TestCustomerService {
-	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("customerconfig.xml");
+public class TestCustomerDAOImpl {
+	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
 	CustomerDAO customerDao = (CustomerDAO)ctx.getBean("CustomerDao");
 	
 	@Test

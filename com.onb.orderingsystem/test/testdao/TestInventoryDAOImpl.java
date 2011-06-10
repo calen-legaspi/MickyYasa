@@ -1,4 +1,4 @@
-package testservice;
+package testdao;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
@@ -10,15 +10,15 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import dao.InventoryDAO;
-import dao.ProductDAOInterface;
+import dao.ProductDAO;
 import domainmodel.Customer;
 import domainmodel.InventoryItem;
 import domainmodel.Product;
 
 
-public class TestInventoryService {
-	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("customerconfig.xml");
-	ProductDAOInterface productDao = (ProductDAOInterface)ctx.getBean("ProductDao");
+public class TestInventoryDAOImpl {
+	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
+	ProductDAO productDao = (ProductDAO)ctx.getBean("ProductDao");
 	InventoryDAO inventoryDao = (InventoryDAO)ctx.getBean("InventoryDao");
 	
 	@Test

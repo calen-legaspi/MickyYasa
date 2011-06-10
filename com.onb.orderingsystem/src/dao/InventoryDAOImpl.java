@@ -1,4 +1,4 @@
-package service;
+package dao;
 
 import java.util.List;
 
@@ -7,11 +7,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import resultretrieval.CustomerRowMapper;
 import resultretrieval.InventoryRowMapper;
 
-import dao.InventoryDAO;
 import domainmodel.InventoryItem;
 import domainmodel.Product;
 
-public class InventoryService implements InventoryDAO {
+public class InventoryDAOImpl implements InventoryDAO {
 	private JdbcTemplate jdbcTemplate;
 
 	public JdbcTemplate getJdbcTemplate() {

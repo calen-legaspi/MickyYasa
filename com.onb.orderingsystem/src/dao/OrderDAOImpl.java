@@ -1,4 +1,4 @@
-package service;
+package dao;
 
 import java.util.*;
 
@@ -11,7 +11,7 @@ import resultretrieval.ProductRowMapper;
 import dao.*;
 import domainmodel.*;
 
-public class OrderService implements OrderDAOInterface {
+public class OrderDAOImpl implements OrderDAO {
 	private	JdbcTemplate jdbcTemplate;
 	
 	@Override
@@ -20,7 +20,7 @@ public class OrderService implements OrderDAOInterface {
 		Object[] params = new Object[]{o.getOrderNumber(), o.getCustomerID(), o.getDateofOrderCreation().getTime(), false};
 		jdbcTemplate.update(sql,params);
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("customerconfig.xml");
-		OrderItemDAOInterface orderitemDao = (OrderItemDAOInterface)ctx.getBean("OrderItemDao");
+		OrderItemDAO orderitemDao = (OrderItemDAO)ctx.getBean("OrderItemDao");
 		for(OrderItem item:o.getItems()){
 			orderitemDao.createOrderItem(item, o.getOrderNumber());
 		}
