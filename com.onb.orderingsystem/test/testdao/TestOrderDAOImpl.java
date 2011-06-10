@@ -2,14 +2,13 @@ package testdao;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
+import java.util.*;
 
 import org.junit.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.dao.DataIntegrityViolationException;
 
-import dao.CustomerDAO;
-import dao.InventoryDAO;
-import dao.OrderDAO;
+import dao.*;
 import domainmodel.*;
 
 public class TestOrderDAOImpl {
@@ -31,24 +30,34 @@ public class TestOrderDAOImpl {
 		}
 	}
 
-	@Test
-	public void testAddOrder() {
+	@Test (expected = DataIntegrityViolationException.class)
+	public void testAddOrderWithEntryAlreadyInTheDatabase() {
 		orderDao.addOrder(testOrder);
+		assertEquals(testOrder.getOrderNumber(), orderDao.retrieveOrder(testOrder.getOrderNumber()).getOrderNumber());
 	}
 
-	//@Test
+	@Test
 	public void testPayOrder() {
-		fail("Not yet implemented");
+		orderDao.payOrder(testOrder);
+		assertEquals(true, orderDao.retrieveOrder(testOrder.getOrderNumber()).hasPaid());
 	}
 
-	//@Test
+	@Test
 	public void testRetrieveOrders() {
-		fail("Not yet implemented");
+		List<Order> orders = new ArrayList<Order>();
+		for(int i = 0 ;i< 5;i++){
+			Order o = new Order(testCustomer);
+			List<InventoryItem> items = inventoryDao.retrieveInventoryItemList();
+			for(InventoryItem item:items){
+				o.addItem(new OrderItem(1, item.getProduct()));
+			}
+			//orderDao.addOrder(o);
+		}
+		Set<Order> dbOrders = orderDao.retrieveOrders(testCustomer);
+		for(Order o:orders){
+			assertTrue(dbOrders.contains(o));
+		}
 	}
 
-//	@Test
-	public void testRetrieveOrder() {
-		fail("Not yet implemented");
-	}
 
 }

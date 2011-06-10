@@ -9,6 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import dao.*;
+import domainmodel.*;
+import java.util.*;
+
 /**
  * Servlet implementation class CreateOrder
  */
@@ -28,25 +34,29 @@ public class CreateOrder extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
+		InventoryDAO inventoryDao = (InventoryDAO)ctx.getBean("InventoryDao");
+		List<InventoryItem> items = inventoryDao.retrieveInventoryItemList();
+		request.setAttribute("listOfProductsInStock", items);
 		if(checkParameters(request)){
-			
+			//TO DO fill up later
 		}else{
 			RequestDispatcher view = request.getRequestDispatcher("createOrder.jsp");
 			view.forward(request, response);
 		}
 	}
-	
-	private boolean checkParameters(HttpServletRequest request){
-		if(request.getAttribute("customerid") == null) {
-			return false;
-		}else if(request.getAttribute("products") ==null){
-			return false;
-		}else if(request.getAttribute("quantity") ==null){
-			return false;
-		}else return true;		
-	}
 
+	private boolean checkParameters(HttpServletRequest request){
+		if(request.getParameter("customerid") ==null){
+			return false;
+		}else if(request.getParameter("products") == null){
+			return false;
+		}else if(request.getParameter("quantity") == null){
+			return false;
+		}else return true;
+		
+	}
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

@@ -27,6 +27,7 @@ public class Order implements Comparable{
 		this.orderNumber = orderNumber;
 		this.payer = payer;
 		increment++;
+		this.date = new GregorianCalendar();
 		this.date.setTime(date);
 		items = new ArrayList<OrderItem>();
 		this.paid = paid;

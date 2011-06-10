@@ -34,14 +34,14 @@ public class OrderDAOImpl implements OrderDAO {
 
 	@Override
 	public void payOrder(Order o) {
-		String sql = "update Order set Paid=true where Order_Number=?";
+		String sql = "update CustomerOrder set Paid=1 where Order_Number=?";
 		Object[] params = {o.getOrderNumber()};
 		jdbcTemplate.update(sql, params);
 	}
 
 	@Override
 	public Set<Order> retrieveOrders(Customer c) {
-		String sql = "select * from Order where CustomerID = ?";
+		String sql = "select * from CustomerOrder where Customer_ID = ?";
 		Object[] params = new Object[]{c.getID()};
 		List<Order> orders = jdbcTemplate.query(sql, params, new OrderRowMapper());
 		Set<Order> customerOrders = new HashSet<Order>();
@@ -65,7 +65,7 @@ public class OrderDAOImpl implements OrderDAO {
 
 	@Override
 	public Order retrieveOrder(int id) {
-		String sql = "select * from Order where Order_Number = ?";
+		String sql = "select * from CustomerOrder where Order_Number = ?";
 		Object[] params = new Object[]{id};
 		List<Order> orders = jdbcTemplate.query(sql, params, new OrderRowMapper());
 		return orders.get(0);

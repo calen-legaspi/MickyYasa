@@ -2,18 +2,23 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%@ page import = "java.util.List, domainmodel.*" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Orange and Bronze Ordering System</title>
 </head>
 <body>
-	<form>
+	<form action="CreateOrder" method="post">
 		<center><img></center>
 		Customer ID: <input name = "customerid"style="height: 33px; ">
 		<br>
 		<br>
 		<br>
 		Product: <select name = "products" style="width: 170px; height: 32px">
+		<% List<InventoryItem> items = (List<InventoryItem>)request.getAttribute("listOfProductsInStock");
+		for(InventoryItem product : items){ %>
+			<option value="<%=product.getSKUNumber()%>"><%=product.getProductName() %></option>
+		<% }%>
 		</select>     
 		Quantity: <input name = quantity"style="height: 33px; ">   
 		<input type="submit" name = "addorders" value="Add Order" style="height: 32px; "><br><br><br>

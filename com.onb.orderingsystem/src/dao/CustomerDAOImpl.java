@@ -62,7 +62,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 
 	@Override
 	public Customer retrieveCustomer(int id) {
-		String sql = "select * from Customer where Customer_ID = ?";
+		String sql = "select * from Customer where ID = ?";
 		Object[] params = {id};
 		List<Customer> customerResults =  this.getJdbcTemplate().query(sql,params, new CustomerRowMapper());
 		return customerResults.get(0);

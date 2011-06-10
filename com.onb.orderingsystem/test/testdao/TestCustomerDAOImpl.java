@@ -17,27 +17,27 @@ public class TestCustomerDAOImpl {
 	
 	@Test
 	public void testDeleteCustomer(){
-		Customer customer = new Customer(1);
+		Customer customer = new Customer(2);
 		customerDao.deleteCustomer(customer);
 	}
 	
 	
 	@Test
 	public void testCreateCustomer(){		
-		Customer customer = new Customer(1);
-		customer.setFirstName("Eleasah");
-		customer.setLastName("Loresco");
-		customer.setMiddleName("Frialde");
+		Customer customer = new Customer(2);
+		customer.setFirstName("Mickey");
+		customer.setLastName("Espiritu");
+		customer.setMiddleName("Dianzon");
 		customerDao.createCustomer(customer);
 		
 	}
 	
 	@Test
 	public void testRetrieveCustomerList(){
-		Customer customer = new Customer(1);
-		customer.setFirstName("Eleasah");
-		customer.setLastName("Loresco");
-		customer.setMiddleName("Frialde");
+		Customer customer = new Customer(2);
+		customer.setFirstName("Mickey");
+		customer.setLastName("Espiritu");
+		customer.setMiddleName("Dianzon");
 		List<Customer> customerList = customerDao.retrieveCustomerList();
 		assertTrue(customerList.contains(customer));
 	}
