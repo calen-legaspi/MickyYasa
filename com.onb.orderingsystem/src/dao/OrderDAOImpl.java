@@ -1,9 +1,14 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 
 import resultretrieval.OrderRowMapper;
 import resultretrieval.ProductRowMapper;
@@ -16,10 +21,11 @@ public class OrderDAOImpl implements OrderDAO {
 	
 	@Override
 	public void addOrder(Order o) {
-		String sql = "insert into Order (Order_Number, Customer_ID, Date, Paid) values (?,?,?,?)";
-		Object[] params = new Object[]{o.getOrderNumber(), o.getCustomerID(), o.getDateofOrderCreation().getTime(), false};
+	String sql = "insert into CustomerOrder (Order_Number, Customer_ID, Date, Paid) values (?,?,?,?)";
+		java.sql.Date date = new java.sql.Date(o.getDateofOrderCreation().getTimeInMillis());
+		Object[] params = new Object[]{o.getOrderNumber(), o.getCustomerID(), date, 0};
 		jdbcTemplate.update(sql,params);
-		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("customerconfig.xml");
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
 		OrderItemDAO orderitemDao = (OrderItemDAO)ctx.getBean("OrderItemDao");
 		for(OrderItem item:o.getItems()){
 			orderitemDao.createOrderItem(item, o.getOrderNumber());

@@ -13,7 +13,7 @@ class OrderItemDAOImpl implements OrderItemDAO {
 
 	@Override
 	public void createOrderItem(OrderItem object, int orderNumber) {
-		String sql = "insert into OrderItem (Order_Number, SKU_Number, PRICE, Quantity) values (?,?,?)";
+		String sql = "insert into OrderItem (Order_Number, SKU_Number, PRICE, Quantity) values (?,?,?,?)";
 		Object[] params = new Object[]{orderNumber, object.getPriceSKUNumber(), object.getProductPrice().doubleValue(), object.getQuantity()};
 		this.getJdbcTemplate().update(sql,params);
 	}

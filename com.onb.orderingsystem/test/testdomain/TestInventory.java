@@ -58,17 +58,17 @@ public class TestInventory {
 	@Test
 	public void testCheckSizeOfAvailableItemsInInventory(){
 		Inventory test = new Inventory(items);
-		Assert.assertEquals(4, test.getAvailableInventory().size());
+		Assert.assertEquals(4, test.getAllItemsInStock().size());
 		InventoryItem i = items.get(0);		
 		test.deduct(i, 5);
-		Assert.assertEquals(3, test.getAvailableInventory().size());
+		Assert.assertEquals(3, test.getAllItemsInStock().size());
 		i = items.get(2);		
 		test.deduct(i, 25);
 		i = items.get(3);		
 		test.deduct(i, 29);
-		Assert.assertEquals(2, test.getAvailableInventory().size());
+		Assert.assertEquals(2, test.getAllItemsInStock().size());
 		test.deduct(i, 1);
-		Assert.assertEquals(1, test.getAvailableInventory().size());
+		Assert.assertEquals(1, test.getAllItemsInStock().size());
 	}
 	
 }

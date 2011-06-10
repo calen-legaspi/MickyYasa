@@ -27,7 +27,7 @@ public class Inventory {
 		return items;
 	}
 	
-	public List<InventoryItem> getAvailableInventory(){
+	public List<InventoryItem> getAllItemsInStock(){
 		ArrayList<InventoryItem> inventory = new ArrayList<InventoryItem>();
 		for(InventoryItem i:items){
 			if(i.getQuantity()>0)
