@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Customer {
 	
-	private int id;
+	private int ID;	
 	private String lastName;
 	private String firstName;
 	private String middleName;
@@ -15,8 +15,8 @@ public class Customer {
 	private Set<Order> orders;
 	
 	
-	public Customer(int id){
-		this.id = id;
+	public Customer(int ID){
+		this.ID = ID;
 		totalPaidOrders = new BigDecimal(0);
 		totalPriceOfOrders = new BigDecimal(0);
 		orders = new HashSet<Order>();
@@ -62,16 +62,8 @@ public class Customer {
 		else if (totalPaidOrders.compareTo(new BigDecimal(1000000)) ==-1)
 			return new BigDecimal(75000);
 		else return new BigDecimal(150000);
-	}
+	}	
 	
-	public int getID(){
-		return id;
-	}
-	
-	public String getName(){
-		return lastName+", "+firstName+" "+middleName;
-	}
-
 	@SuppressWarnings("unchecked")
 	public List<Order> getUnpaidOrders(){
 		List<Order> unpaidOrders = new ArrayList<Order>();
@@ -85,6 +77,14 @@ public class Customer {
 	
 	public BigDecimal getTotalUnpaidOrders(){
 		return totalPriceOfOrders.subtract(totalPaidOrders);
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		this.ID = iD;
 	}
 
 	public String getLastName() {
@@ -115,7 +115,7 @@ public class Customer {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ID;
 		return result;
 	}
 
@@ -128,7 +128,7 @@ public class Customer {
 		if (getClass() != obj.getClass())
 			return false;
 		Customer other = (Customer) obj;
-		if (id != other.id)
+		if (ID != other.ID)
 			return false;
 		return true;
 	}

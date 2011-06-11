@@ -1,10 +1,5 @@
 package controller;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 
@@ -18,7 +13,7 @@ public class OrderService {
 	static ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
 	static OrderDAO orderDao = (OrderDAO)ctx.getBean("OrderDao");
 
-	private OrderService(){
+	public OrderService(){
 		
 	}
 
