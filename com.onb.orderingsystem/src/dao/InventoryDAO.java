@@ -11,5 +11,7 @@ public interface InventoryDAO {
 	
 	public List<InventoryItem> retrieveInventoryItemList();
 	
+	public List<InventoryItem> retrieveAvailableProducts();
+	
 	public void updateInventory(InventoryItem inventoryItem);
 }

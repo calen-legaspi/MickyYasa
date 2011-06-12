@@ -2,10 +2,17 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import = "java.util.Collection, domainmodel.Customer, java.util.List, java.util.ArrayList" %>
+
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Order History</title>
+	<script type = "text/javascript">
+		function ajaxFunction(){
+			alert("Hello World");	
+		}
+	</script>
+	
 </head>
 <body>
 	<center>
@@ -22,7 +29,7 @@
 	}
    	%>
    	
-   	<select name = "customer" style="width: 295px; height: 32px">
+   	<select name = "customer" style="width: 295px; height: 32px" onChange="ajaxFunction()">
 		
 		<% for(Customer customer : customerList){ %>
 			<option value="<%= customer.getID() %>"> <%= customer.getLastName() + ", " + customer.getFirstName() %></option>

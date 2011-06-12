@@ -12,13 +12,19 @@ public class CustomerService {
 	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
 	CustomerDAO customerDao = (CustomerDAO)ctx.getBean("CustomerDao");
 
+	/**
+	 * 
+	 * @return the entire customer list
+	 */
 	public List<Customer> getCustomerList(){
-		List<Customer> customerList = customerDao.retrieveCustomerList();
-		return customerList;
+		return customerDao.retrieveCustomerList();
 	}
 	
+	/**
+	 * 
+	 * @return the list of customers with unpaid orders
+	 */
 	public List<Customer> getCustomerWithUnpaidOrders(){
-		List<Customer> customerList = customerDao.retrieveUnpaidCustomerList();
-		return customerList;
+		return customerDao.retrieveUnpaidCustomerList();
 	}
 }
