@@ -36,11 +36,7 @@ public class TestOrderDAOImpl {
 		assertEquals(testOrder.getOrderNumber(), orderDao.retrieveOrder(testOrder.getOrderNumber()).getOrderNumber());
 	}
 
-	@Test
-	public void testPayOrder() {
-		orderDao.payOrder(testOrder);
-		assertEquals(true, orderDao.retrieveOrder(testOrder.getOrderNumber()).hasPaid());
-	}
+
 
 	@Test
 	public void testRetrieveOrders() {
@@ -51,7 +47,7 @@ public class TestOrderDAOImpl {
 			for(InventoryItem item:items){
 				o.addItem(new OrderItem(1, item.getProduct()));
 			}
-			//orderDao.addOrder(o);
+			orderDao.addOrder(o);
 		}
 		Set<Order> dbOrders = orderDao.retrieveOrders(testCustomer);
 		for(Order o:orders){
