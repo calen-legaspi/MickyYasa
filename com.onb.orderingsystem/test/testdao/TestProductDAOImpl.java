@@ -19,14 +19,6 @@ public class TestProductDAOImpl {
 	InventoryDAO inventoryDao = (InventoryDAO)ctx.getBean("InventoryDao");
 	
 	@Test
-	public void testDeleteProduct(){	
-		Product  product = new Product(10234242, "Coke", new BigDecimal("100.00"));
-		InventoryItem inventoryItem = new InventoryItem(10, product);
-		inventoryDao.deleteInventoryItemFromInventory(inventoryItem);
-		productDao.deleteProduct(product);
-	}
-	
-	@Test
 	public void testCreateProduct(){		
 		Product  product = new Product(10234242, "Coke", new BigDecimal("100.00"));
 		productDao.createProduct(product);
@@ -37,4 +29,11 @@ public class TestProductDAOImpl {
 		Assert.assertTrue(productDao.getProduct(10234242).getName().equals("Coke"));
 	}
 
+	@Test
+	public void testDeleteProduct(){	
+		Product  product = new Product(10234242, "Coke", new BigDecimal("100.00"));
+		InventoryItem inventoryItem = new InventoryItem(10, product);
+		inventoryDao.deleteInventoryItemFromInventory(inventoryItem);
+		productDao.deleteProduct(product);
+	}
 }
