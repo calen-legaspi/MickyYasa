@@ -26,7 +26,7 @@ public class OrderHistory extends HttpServlet {
      */
     public OrderHistory() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
@@ -37,7 +37,7 @@ public class OrderHistory extends HttpServlet {
 			//FIXME fill this up
 		}else{
 			CustomerService customerService = new CustomerService();
-			List<Customer> listOfCustomer = customerService.getCustomerList(); //insert service here
+			List<Customer> listOfCustomer = customerService.getCustomerList();
 			
 			for(Customer customer : listOfCustomer){
 				System.out.println(customer.getFirstName()+" "+customer.getLastName());

@@ -18,7 +18,7 @@ public class OrderService {
 	static ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
 	static OrderDAO orderDao = (OrderDAO)ctx.getBean("OrderDao");
 
-	private OrderService(){
+	public OrderService(){
 		
 	}
 

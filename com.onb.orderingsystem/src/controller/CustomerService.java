@@ -19,4 +19,8 @@ public class CustomerService {
 	public List<Customer> getCustomerWithUnpaidOrders(){
 		return customerDao.retrieveUnpaidCustomerList();
 	}
+	
+	public Customer getCustomer(int id){
+		return customerDao.retrieveCustomer(id);
+	}
 }
