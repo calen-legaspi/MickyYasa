@@ -17,48 +17,28 @@ public class TestCustomerDAOImpl {
 	
 	@Test
 	public void testDeleteCustomer(){
-		customerDao.deleteCustomer(new Customer(0));
-		customerDao.deleteCustomer(new Customer(1));
+		Customer customer = new Customer(2);
+		customerDao.deleteCustomer(customer);
 	}
 	
 	
 	@Test
 	public void testCreateCustomer(){		
-		Customer customer = new Customer(0);
+		Customer customer = new Customer(2);
 		customer.setFirstName("Mickey");
 		customer.setLastName("Espiritu");
 		customer.setMiddleName("Dianzon");
 		customerDao.createCustomer(customer);
 		
-		Customer customer1 = new Customer(1);
-		customer1.setFirstName("Eleasah");
-		customer1.setLastName("Loresco");
-		customer1.setMiddleName("Frialde");
-		customerDao.createCustomer(customer1);
-		
 	}
 	
 	@Test
 	public void testRetrieveCustomerList(){
-		Customer customer = new Customer(0);
+		Customer customer = new Customer(2);
 		customer.setFirstName("Mickey");
 		customer.setLastName("Espiritu");
 		customer.setMiddleName("Dianzon");
-		
-		Customer customer1 = new Customer(1);
-		customer1.setFirstName("Eleasah");
-		customer1.setLastName("Loresco");
-		customer1.setMiddleName("Frialde");
-		
 		List<Customer> customerList = customerDao.retrieveCustomerList();
-		
 		assertTrue(customerList.contains(customer));
-		assertTrue(customerList.contains(customer1));
-	}
-	
-	@Test
-	public void DeleteCustomer(){
-		customerDao.deleteCustomer(new Customer(0));
-		customerDao.deleteCustomer(new Customer(1));
 	}
 }

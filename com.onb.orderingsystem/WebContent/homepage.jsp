@@ -6,37 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Orange and Bronze Ordering System</title>
 </head>
-<body bgcolor = "#FFCC99">
+<body>
 	<center>
 		<img src="images/os.png">
-		<br/>
-		<br/>
 		<p> Select a service:</p>
 
-		<table style="height: 42px; width: 300px; " border = 0>
-		<tr>
-			<td align = "center" style="width: 300px; ">
-			<img src = "images/createorder.jpg" style="height: 130px; width: 180px; ">
-			</td>
-			<td align = "center" style="width: 300px; ">
-			<img src = "images/payment.jpg" style="height: 130px; width: 180px; ">
-			</td>
-			<td align = "center" style="width: 300px; ">
-			<img src = "images/orderhistory.png" style="height: 130px; width: 180px; ">
-			</td>
-		</tr>
-		<tr>
-			<td align = "center" style="width: 300px; ">
-			<a href = "CreateOrder">Create An Order</a>
-			</td >
-			<td align = "center" style="width: 300px; "">
-			<a href = "">Pay an Order</a><br>
-			</td>
-			<td align = "center" style="width: 300px; ">
-			<a href = "OrderHistory">View Order History</a>
-			</td>
-		</tr>		
-		</table>
+		<a href = "CreateOrder">Create An Order</a> <br>
+		<a href = "">Pay an Order</a><br>
+		<a href = "OrderHistory">View Order History</a>
+
 	</center>
 </body>
 </html>
