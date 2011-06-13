@@ -5,35 +5,82 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Orange and Bronze Ordering System</title>
+<link rel="stylesheet" type="text/css" href="style.css" /> 
+<title>Ordering System</title>
 </head>
 <body>
-	<center>
-	<img src = "images/os.png">
-	<form method = "POST" action = "ViewOrders">
-		<br/>
-		<br/>
-
-		<%
+<div id="bg">
+	<div id="wrap">
+		<div class="lb fl"></div>
+		<div id="content" class="fl">
+			<div id="header"> <img src="images/been.png" class="fr logo" />
+        		<h1>orderingSystem 1.0</h1>
+        		<div></div>
+      		</div>
+     	
+     		<h2>Payment of Orders</h2>
+			
+			<form method = "POST" action = "UnpaidOrders">
+				<br/><br/>
 		
-		List<Customer> customerList = new ArrayList<Customer>();
-		if(request.getAttribute("listOfCustomer")!=null){
-			customerList = (List<Customer>) request.getAttribute("listOfCustomer");
-		}
-	   	%>
-   	
-   		<select name = "customer" style="width: 295px; height: 32px">
-		
-		<% for(Customer customer : customerList){ %>
-			<option value="<%= customer.getID() %>"> <%= customer.getLastName() + ", " + customer.getFirstName() %></option>
-		<% } %>
-		
-		</select>    
-		<input type="submit" value="OK"><br/>
-		<br/>
-		
-	</form>
-	 
-	</center>
+				<%
+				
+				List<Customer> customerList = new ArrayList<Customer>();
+				if(request.getAttribute("listOfCustomer")!=null){
+					customerList = (List<Customer>) request.getAttribute("listOfCustomer");
+				}
+			   	%>
+			   	
+		   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		   		Select Customer: <br/><br/>
+		   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		   		
+		   		<select name = "customer" style="width: 295px; height: 32px">
+				
+				<% for(Customer customer : customerList){ %>
+					<option value="<%= customer.getID() %>"> <%= customer.getLastName() + ", " + customer.getFirstName() %></option>
+				<% } %>
+				
+				</select>  
+				  
+				<input type="submit" value="OK"><br/>
+				<br/>
+			
+			</form>
+		</div>
+    	<div id="side" class="fl">
+      		<div class="sinner">
+	        <h2>Categories</h2>
+	        <center>
+	        <br />
+	        <img src = "images/home.jpg" style="height: 78px; width: 90px; ">
+	        <br />
+	        <a href = "#" > Home </a>
+	        <br /><br />
+	        <img src="images/createorder.jpg" style="height: 78px; width: 90px; "/>
+	        <br />
+	        <a href = "CreateOrder" > Create Order </a>
+	        <br /><br />
+	        <img src="images/payment.jpg" style="height: 78px; width: 90px; "/>
+	        <br />
+	        <a href = "Payment" > Payment </a>
+	        <br /><br />
+	        <img src="images/history.gif" style="height: 78px; width: 90px; "/>
+	        <br />
+	        <a href = "OrderHistory" > Order History </a>
+	        <br /><br />
+	        </center>
+      		</div>
+   		 </div>
+  		
+  		 <div id="sider" class="fl">
+  		 	<div class="sdinner"></div>
+  		 </div>
+  		 
+  		 <!-- /content -->
+  		 <div class="clearfix"> </div>
+  		 <!-- /footer -->
+	</div>
+</div>
 </body>
-</html>

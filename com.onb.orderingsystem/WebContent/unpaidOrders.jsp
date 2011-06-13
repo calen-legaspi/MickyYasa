@@ -18,36 +18,40 @@
         		<div></div>
       		</div>
      	
-     		<h2>Order History</h2>
+     		<h2>Payment of Orders</h2>
      		
-     		<form method = "POST" action = "ViewOrders">
-			<br/><br/>
-				
-			<%
-			List<Customer> customerList = new ArrayList<Customer>();
-			if(request.getAttribute("listOfCustomer")!=null){
-			customerList = (List<Customer>) request.getAttribute("listOfCustomer");
+     		<center>
+			
+			<form method = "POST" action = "OrderDetails">
+			
+			<%		
+			Set<Order> orderList = new HashSet<Order>();
+			if(request.getAttribute("listOfOrder")!=null){
+				orderList = (HashSet<Order>) request.getAttribute("listOfOrder");
 			}
+			Customer customer  = (Customer)request.getAttribute("customer");
 	   		%>
-   		
-   			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		   	Select Customer: <br/><br/>
-		   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		   		
-   			<select name = "customer" style="width: 295px; height: 32px">
+			<h2>Orders of <%= customer.getFirstName() + " " + customer.getLastName() %></h2>
+			
+			<table border = 1>
+				<tr>
+					<td align = "center">Order Date</td>
+					<td align = "center">Total Cost</td>
+					<td align = "center">Action</td>
+				</tr>
 		
-			<% for(Customer customer : customerList){ %>
-				<option value="<%= customer.getID() %>"> <%= customer.getLastName() + ", " + customer.getFirstName() %></option>
-			<% } %>
-		
-			</select>    
-			<input type="submit" value="OK"><br/>
-			<br/>
-			</form>
-	 		
-
+				<% for(Order order : orderList){ %>
+					<tr>
+						<td align = "center"><%= order.getDateofOrderCreation().getTime() %></td>
+						<td align = "center"><%= order.computeTotalCost(customer.getCreditLimit().intValue()).doubleValue()%></td>
+						<td align = "center"><input type="submit" value="Pay" name = "<%= order.getOrderNumber() %>"></td>
+					</tr>
+				<% } %>
+			</table>
+			</form>	 
+	 		</center>
 		</div>
+    
     	<div id="side" class="fl">
       		<div class="sinner">
 	        <h2>Categories</h2>
@@ -83,3 +87,4 @@
 	</div>
 </div>
 </body>
+</html>
