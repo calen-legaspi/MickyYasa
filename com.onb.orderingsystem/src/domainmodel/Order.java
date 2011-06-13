@@ -35,6 +35,7 @@ public class Order implements Comparable,Serializable{
 	
 	public void addItem(OrderItem o){
 		items.add(o);
+		consolidateItems();
 	}
 	
 	public void deleteItem(OrderItem o){
@@ -43,7 +44,7 @@ public class Order implements Comparable,Serializable{
 		}
 	}
 	
-	public void update(){
+	public void consolidateItems(){
 		ArrayList<OrderItem> newOrderList = new ArrayList<OrderItem>();
 		for(OrderItem i: items){
 			if(newOrderList.contains(i))

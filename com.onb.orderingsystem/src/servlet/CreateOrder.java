@@ -13,9 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import controller.InventoryService;
-import controller.ProductService;
-
+import controller.*;
 import dao.*;
 import domainmodel.*;
 import java.util.*;
@@ -53,34 +51,52 @@ public class CreateOrder extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if(checkParameters(request)){
-			List<OrderItem> orderitems = getOrderItemsList(request);
-			int quantity = Integer.valueOf(request.getParameter("quantity"));
-			Product product = ProductService.getProduct(Integer.valueOf(request.getParameter("products")));
-			OrderItem orderItem = new OrderItem(quantity,product); 
-			orderitems.add(orderItem);
-			session.setAttribute("listOfOrderedItems", orderitems);
+			Customer customer  = CustomerService.getCustomer(Integer.valueOf(request.getParameter("customerid")));
+			if(customer !=null){
+				session.setAttribute("customer", customer);
+				Order order = getOrder(request);
+				int quantity = Integer.valueOf(request.getParameter("quantity"));
+				int productNumber = Integer.valueOf(request.getParameter("products"));
+				Product product = ProductService.getProduct(productNumber);
+				OrderItem orderItem = new OrderItem(quantity,product); 
+				order.addItem(orderItem);				
+				session.setAttribute("order", order);
+			}
+		}
+		if(isDeleteButtonClicked(request.getParameter("deleteitem"))){
+			Order order = getOrder(request);
+			int itemIndex = Integer.valueOf(request.getParameter("orderIndex"));
+			OrderService.deleteOrderItem(order, itemIndex);
+			session.setAttribute("order", order);
 		}
 		RequestDispatcher view = request.getRequestDispatcher("createOrder.jsp");
 		view.forward(request, response);
 	}
 	
-	private List<OrderItem> getOrderItemsList(HttpServletRequest request){
+	private Order getOrder(HttpServletRequest request){
 		HttpSession session = request.getSession();
-		List<OrderItem> orders = (List<OrderItem>)session.getAttribute("listOfOrderedItems");
-		if(orders == null){
-			return new ArrayList<OrderItem>();
-		}else return orders;	
+		Order order = (Order)session.getAttribute("order");
+		if(order == null){
+			return new Order((Customer)session.getAttribute("customer"));
+		}else return order;	
 	}
 	
 	private boolean checkParameters(HttpServletRequest request){
-		if(request.getParameter("customerid") == null){
+		if(request.getParameter("customerid").equals("")){
 			return false;
 		}else if(request.getParameter("products").equals("none")){
 			return false;
-		}else if(request.getParameter("quantity") == null){
+		}else if(request.getParameter("quantity").equals("")){
 			return false;
-		}else return true;
-		
+		}else return true;	
+	}
+	
+	private boolean isDeleteButtonClicked(String requestParameter){
+		if(requestParameter == null)
+			return false;
+		else if (requestParameter.contains("Delete"))
+			return true;
+		else return false;
 	}
 
 }

@@ -22,7 +22,7 @@ public class TestCustomer {
 		tempOrder = new Order(testCustomer);
 		tempOrder.addItem(new OrderItem(5, new Product(555, "Pepsi", new BigDecimal("15.00"))));
 		tempOrder.addItem(new OrderItem(200, new Product(777, "Coke", new BigDecimal("15.00"))));
-		tempOrder.update();
+		tempOrder.consolidateItems();
 	}
 	
 	@After
@@ -47,7 +47,7 @@ public class TestCustomer {
 	//@Test
 	public void testAddingAnOrderWithHigherTotalCostThanCreditLimit(){
 		tempOrder.addItem(new OrderItem(1000,new Product(222,"Explosives", new BigDecimal("7000.50"))));
-		tempOrder.update();
+		tempOrder.consolidateItems();
 		testCustomer.addOrder(tempOrder);
 		Assert.assertFalse(testCustomer.getUnpaidOrders().contains(tempOrder));
 	}
@@ -67,7 +67,7 @@ public class TestCustomer {
 		for(int i = 0; i< 25; i++){
 			tempOrder = new Order(testCustomer);
 			tempOrder.addItem(new OrderItem(100, new Product(555+i, "Pepsi", new BigDecimal("100.00"))));
-			tempOrder.update();
+			tempOrder.consolidateItems();
 			testCustomer.addOrder(tempOrder);
 			testCustomer.payOrder(tempOrder);
 		}	
@@ -79,7 +79,7 @@ public class TestCustomer {
 		for(int i = 0; i< 14; i++){
 			tempOrder = new Order(testCustomer);
 			tempOrder.addItem(new OrderItem(10, new Product(555+i, "Pepsi", new BigDecimal("100.00"))));
-			tempOrder.update();
+			tempOrder.consolidateItems();
 			testCustomer.addOrder(tempOrder);
 			if(testCustomer.getOrders().contains(tempOrder))
 				System.out.println(i);
@@ -94,7 +94,7 @@ public class TestCustomer {
 		for(int i = 0; i< 14; i++){
 			tempOrder = new Order(testCustomer);
 			tempOrder.addItem(new OrderItem(10, new Product(555+i, "Pepsi", new BigDecimal("100.00"))));
-			tempOrder.update();
+			tempOrder.consolidateItems();
 			testCustomer.addOrder(tempOrder);
 			if(i%2 ==1)
 				testCustomer.payOrder(tempOrder);
