@@ -37,21 +37,26 @@
 					<td align = "center">Order Number</td>
 					<td align = "center">Order Date</td>
 					<td align = "center">Total Cost</td>
+					<td align = "center">Action</td>
 				</tr>
 		
 				<% for(Order order : orderList){ int orderNumber = order.getOrderNumber(); %>
 				
 				<tr>
 					<td align = "center">
-						<a href = "OrderDetails?orderNumber=<%= orderNumber %>&customer=<%= customer.getID() %>">
 						<%= orderNumber%>
-						</a>
+						
 					</td>
 					<td align = "center">
 						<%= order.getDateofOrderCreation().getTime() %>
 					</td>
 					<td align = "center">
 						<%= order.computeTotalCost(customer.getCreditLimit().intValue()).doubleValue()%>
+					</td>
+					<td align = "center">
+						<input type = "submit" name = "<%= orderNumber %>" value = "View" />
+						<input type = "hidden" value = "<%= orderNumber%>" name = "orderNum"/>
+						
 					</td>
 						
 				</tr>
