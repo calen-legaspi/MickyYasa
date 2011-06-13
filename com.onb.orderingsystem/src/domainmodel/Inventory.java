@@ -1,8 +1,9 @@
 package domainmodel;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Inventory {
+public class Inventory implements Serializable{
 	
 	private List<InventoryItem> items;
 	

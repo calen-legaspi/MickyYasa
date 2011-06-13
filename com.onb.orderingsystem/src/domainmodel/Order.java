@@ -1,9 +1,10 @@
 package domainmodel;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class Order implements Comparable{
+public class Order implements Comparable,Serializable{
 	
 	private int orderNumber;
 

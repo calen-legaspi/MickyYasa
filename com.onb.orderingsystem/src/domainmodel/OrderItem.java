@@ -1,8 +1,9 @@
 package domainmodel;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class OrderItem {
+public class OrderItem implements Serializable{
 	
 	private int quantity;
 	private Product product;
@@ -55,6 +56,10 @@ public class OrderItem {
 		} else if (!product.equals(other.product))
 			return false;
 		return true;
+	}
+	
+	public String getProductName(){
+		return product.getName();
 	}
 
 	public int getPriceSKUNumber(){
