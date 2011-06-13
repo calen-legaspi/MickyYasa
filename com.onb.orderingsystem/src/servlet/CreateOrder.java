@@ -51,11 +51,17 @@ public class CreateOrder extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if(checkParameters(request)){
+		if(isDeleteButtonClicked(request.getParameter("orderIndex"))){
+			Order order = getOrder(request);
+			int itemIndex = Integer.valueOf(request.getParameter("orderIndex"));
+			OrderService.deleteOrderItem(order, itemIndex);
+			session.setAttribute("order", order);
+		}else if(checkParameters(request)){
 			Customer customer  = CustomerService.getCustomer(Integer.valueOf(request.getParameter("customerid")));
 			if(customer !=null){
 				session.setAttribute("customer", customer);
 				Order order = getOrder(request);
+				List<InventoryItem> inventoryitems = (List<InventoryItem>)session.getAttribute("listOfProductsInStock");
 				int quantity = Integer.valueOf(request.getParameter("quantity"));
 				int productNumber = Integer.valueOf(request.getParameter("products"));
 				Product product = ProductService.getProduct(productNumber);
@@ -63,14 +69,7 @@ public class CreateOrder extends HttpServlet {
 				order.addItem(orderItem);				
 				session.setAttribute("order", order);
 			}
-		}
-		if(isDeleteButtonClicked(request.getParameter("deleteitem"))){
-			Order order = getOrder(request);
-			int itemIndex = Integer.valueOf(request.getParameter("orderIndex"));
-			OrderService.deleteOrderItem(order, itemIndex);
-			session.setAttribute("order", order);
-		}
-		if(isAddOrderButtonClicked(request.getParameter("Add"))){
+		}else if(isAddOrderButtonClicked(request.getParameter("Add"))){
 			Order order = getOrder(request);	
 			OrderService.addOrderToDB(order);
 			session.removeAttribute("order");
@@ -92,7 +91,13 @@ public class CreateOrder extends HttpServlet {
 	}
 	
 	private boolean checkParameters(HttpServletRequest request){
-		if(request.getParameter("customerid").equals("")){
+		if(request.getParameter("customerid")==null){
+			return false;
+		}else if(request.getParameter("products")==null){
+			return false;
+		}else if(request.getParameter("quantity")==null){
+			return false;
+		}else if(request.getParameter("customerid").equals("")){
 			return false;
 		}else if(request.getParameter("products").equals("none")){
 			return false;
@@ -104,9 +109,7 @@ public class CreateOrder extends HttpServlet {
 	private boolean isDeleteButtonClicked(String requestParameter){
 		if(requestParameter == null){
 			return false;
-		}else if (requestParameter.contains("Delete")){
-			return true;
-		}else return false;
+		}else return true;
 	}
 	
 	private boolean isAddOrderButtonClicked(String requestParameter){
