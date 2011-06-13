@@ -28,6 +28,10 @@ public class OrderService {
 	public static void updateStatusOfOrderInDB(Order o) {
 		orderDao.payOrder(o);
 	}
+	
+	public Set<Order> retrieveOrdersFromDB(Customer c){
+		return orderDao.retrieveOrders(c);
+	}
 
 	public static Customer addOrdersFromDB(Customer c) {
 		Customer newCustomer = new Customer(c.getID());

@@ -31,6 +31,7 @@ public class Order implements Comparable{
 		this.date.setTime(date);
 		items = new ArrayList<OrderItem>();
 		this.paid = paid;
+		computeTotalCost();
 	}
 	
 	public void addItem(OrderItem o){
