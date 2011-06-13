@@ -40,6 +40,9 @@ public class CustomerDAOImpl implements CustomerDAO{
 		return this.getJdbcTemplate().query("select * from Customer", new CustomerRowMapper());
 	}
 	
+	/**
+	 * Retrieves the List of Customer With Unpaid Orders
+	 */
 	public List<Customer> retrieveUnpaidCustomerList(){
 		List<Customer> customers = retrieveCustomerList();
 		List<Customer> unpaidCustomers = new ArrayList<Customer>();
@@ -60,6 +63,9 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 
+	/**
+	 * Retrieves the Entire List of Customer
+	 */
 	public Customer retrieveCustomer(int id) {
 		String sql = "select * from Customer where ID = ?";
 		Object[] params = {id};
