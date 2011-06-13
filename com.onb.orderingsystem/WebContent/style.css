@@ -46,6 +46,12 @@ a:hover {
 #nav a:hover {background: #DDED06 url(images/hover.jpg); color:#000000 }
 
 
+li.h {width:107px}
+li.a {width: 128px; padding-left: 2px;}
+li.p {width: 129px; padding-left: 2px; }
+li.c {width:128px; padding-left: 2px;}
+li.d {width:144px; padding-left: 2px;}
+
 /* content */
 #footer  { margin:0 20px}
 #content {background:url(images/ct_bg.gif) repeat-y; width:503px;  }
@@ -82,13 +88,13 @@ a:hover {
 }
 .leftbar, .leftbar2, .leftbar3 {height:112px; width:31px; }
 
-/*.leftbar { background: url(images/bar3.gif);  position:absolute;left:60px; top:120px }
-.leftbar2 {background: url(images/bar3.gif);  position:absolute;left:60px; top:250px}
+/*.leftbar { background: url(images/bar.gif);  position:absolute;left:60px; top:120px }
+.leftbar2 {background: url(images/bar2.gif);  position:absolute;left:60px; top:250px}
 .leftbar3 {background: url(images/bar3.gif);position:absolute;left:60px; top:390px  }
 */
 
-.leftbar { background: url(images/bar3.gif);  }
-.leftbar2 {background: url(images/bar3.gif);  }
+.leftbar { background: url(images/bar.gif);  }
+.leftbar2 {background: url(images/bar2.gif);  }
 .leftbar3 {background: url(images/bar3.gif); }
 /* footer */
 #footer {  padding:15px 0 }

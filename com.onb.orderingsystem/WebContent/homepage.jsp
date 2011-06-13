@@ -18,12 +18,9 @@
         <div></div>
       </div>
       
-      
       <!-- body here -->
       <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
       <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-      
-      
       
       <div id="footer">
         <p id="copyright">© 2011. All Rights Reserved. <br/>
@@ -32,8 +29,8 @@
     </div>
     <div id="side" class="fl">
       <div class="sinner">
-        <h2>Categories</h2>
-        <center>
+     	<h2>Categories</h2>
+      	<center>
         <br />
         <img src = "images/home.jpg" style="height: 78px; width: 90px; ">
         <br />
