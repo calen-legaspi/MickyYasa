@@ -32,7 +32,7 @@
 					<td align = "center">
 						Total Cost
 					</td>
-					<td alignt = "center">
+					<td align = "center">
 						Action
 					</td>
 				</tr>
