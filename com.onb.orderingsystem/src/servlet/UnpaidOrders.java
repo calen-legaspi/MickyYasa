@@ -1,8 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,7 +50,7 @@ public class UnpaidOrders extends HttpServlet {
 			Customer customer = customerService.getCustomer(selectedCustomer);
 			
 			OrderService orderService = new OrderService();		
-			Set<Order> listOfOrder = (HashSet<Order>) orderService.retrieveOrdersFromDB(customer);
+			List<Order> listOfOrder = orderService.retrieveUnpaidOrders(customer);
 			
 			request.setAttribute("listOfOrder", listOfOrder);
 			request.setAttribute("customer", customer);

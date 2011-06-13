@@ -39,9 +39,9 @@
 			<form method = "POST" action = "UpdateOrderStatus" enctype="application/x-www-form-urlencoded">
 			
 			<%		
-			Set<Order> orderList = new HashSet<Order>();
+			List<Order> orderList = new ArrayList<Order>();
 			if(request.getAttribute("listOfOrder")!=null){
-				orderList = (HashSet<Order>) request.getAttribute("listOfOrder");
+				orderList = (List<Order>) request.getAttribute("listOfOrder");
 			}
 			Customer customer  = (Customer)request.getAttribute("customer");
 	   		%>

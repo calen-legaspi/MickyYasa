@@ -56,4 +56,9 @@ public class OrderService {
 		}
 		return newCustomer;
 	}
+	
+	public static List<Order> retrieveUnpaidOrders(Customer customer){
+		List<Order> orders = orderDao.retrieveUnpaidOrders(customer.getID());
+		return orders;
+	}
 }
