@@ -7,8 +7,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Orange and Bronze Ordering System</title>
 </head>
+<script type="text/javascript">
+	function deleteItem(index){
+		var form = document.createElement("form");
+		form.setAttribute("method", "post");
+		form.setAttribute("action","CreateOrder");
+		var idField = 	document.createElement("input");
+		idField.setAttribute("type", "hidden");
+		idField.setAttribute("name", "orderIndex");
+		idField.setAttribute("value", index);
+		form.appendChild(idField);
+		document.body.appendChild(form);
+		form.submit();
+	}
+</script>
 <body>
-	<form action="CreateOrder" method="post">
+	<form action="CreateOrder" method="post" enctype="application/x-www-form-urlencoded">
 		<center><img></center>
 		Customer ID: 
 		<% 	int credLimit =0;
@@ -57,9 +71,8 @@
 						<td width="200" align="center"><%=orderitem.getProductName() %></td>
 						<td><%= orderitem.getQuantity() %></td>
 						<td width = "200" align = "center"><%=orderitem.getProductPrice().doubleValue() %></td>
-						<td width = "200px">
-							<input type = "hidden" name = "orderIndex" value = "<%=orderItems.indexOf(orderitem)%>">
-							<input type = "submit" name = "deleteitem" value = "Delete">
+						<td  width = "200px">
+							<input type = "button" name = "deleteitem" value = "Delete" onclick="deleteItem(<%= orderItems.indexOf(orderitem) %>)">
 						</td>
 					</tr>
 				<%}%>
