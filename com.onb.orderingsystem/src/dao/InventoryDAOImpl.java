@@ -46,11 +46,16 @@ public class InventoryDAOImpl implements InventoryDAO {
 		return this.getJdbcTemplate().query("select * from Inventory", new InventoryRowMapper());
 	}
 	
+	/**
+	 * Retrieves all inventory items with quantity greater than 0
+	 */
 	public List<InventoryItem> retrieveAvailableProducts(){
 		return this.getJdbcTemplate().query("select * from Inventory where quantity > 0", new InventoryRowMapper());
 	}
 	
-	
+	/**
+	 * Updates the quantity of the Inventory Item
+	 */
 	public void updateInventory(InventoryItem inventoryItem){
 		String sql = "update Inventory set quantity = ? where SKU_Number = ?";
 		Object[] params = {inventoryItem.getQuantity(), inventoryItem.getSKUNumber()};
