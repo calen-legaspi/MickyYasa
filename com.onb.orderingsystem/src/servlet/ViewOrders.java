@@ -36,6 +36,15 @@ public class ViewOrders extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+			
+	}
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(!(checkParameters(request))){
 			int selectedCustomer = Integer.parseInt(request.getParameter("customer"));
 			
 			CustomerService customerService = new CustomerService();
@@ -48,15 +57,13 @@ public class ViewOrders extends HttpServlet {
 			request.setAttribute("customer", customer);
 			RequestDispatcher view = request.getRequestDispatcher("viewOrders.jsp");
 			view.forward(request, response);
-		
+		}
 	}
 	
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	private boolean checkParameters(HttpServletRequest request){
+		if(request.getAttribute("customer") == null) {
+			return false;
+		}else return true;		
 	}
 
 }

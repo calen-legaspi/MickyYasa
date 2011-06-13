@@ -32,7 +32,7 @@
 					<td align = "center">
 						Total Cost
 					</td>
-					<td alignt = "center">
+					<td align = "center">
 						Action
 					</td>
 				</tr>
@@ -40,7 +40,7 @@
 		<% for(Order order : orderList){ %>
 				<tr>
 					<td align = "center">
-					<%= order.getDateofOrderCreation()%>
+					<%= order.getDateofOrderCreation().getTime() %>
 					</td>
 					<td align = "center">
 					<%= order.getTotalCost() %>

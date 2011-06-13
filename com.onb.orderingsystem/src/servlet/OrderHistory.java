@@ -1,9 +1,12 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import controller.CustomerService;
+import controller.OrderService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domainmodel.Customer;
+import domainmodel.Order;
 
 /**
  * Servlet implementation class CustomerServlet
@@ -33,20 +37,11 @@ public class OrderHistory extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(checkParameters(request)){
-			//FIXME fill this up
-		}else{
+		if(!(checkParameters(request))){
 			CustomerService customerService = new CustomerService();
 			List<Customer> listOfCustomer = customerService.getCustomerList();
-			
-			for(Customer customer : listOfCustomer){
-				System.out.println(customer.getFirstName()+" "+customer.getLastName());
-			}
-			
-			request.setAttribute("listOfCustomer", listOfCustomer);
-			
-			//int selectedCustomer = Integer.parseInt(request.getParameter("customer"));
-			
+
+			request.setAttribute("listOfCustomer", listOfCustomer);		
 			
 			RequestDispatcher view = request.getRequestDispatcher("orderHistory.jsp");
 			view.forward(request, response);
@@ -55,11 +50,7 @@ public class OrderHistory extends HttpServlet {
 	
 
 	private boolean checkParameters(HttpServletRequest request){
-		if(request.getAttribute("customerid") == null) {
-			return false;
-		}else if(request.getAttribute("products") ==null){
-			return false;
-		}else if(request.getAttribute("quantity") ==null){
+		if(request.getAttribute("customer") == null) {
 			return false;
 		}else return true;		
 	}
@@ -69,7 +60,17 @@ public class OrderHistory extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+int selectedCustomer = Integer.parseInt(request.getParameter("customer"));
 		
+		CustomerService customerService = new CustomerService();
+		Customer customer = customerService.getCustomer(selectedCustomer);
+		
+		OrderService orderService = new OrderService();		
+		Set<Order> listOfOrder = (HashSet<Order>) orderService.retrieveOrdersFromDB(customer);
+		
+		request.setAttribute("listOfOrder", listOfOrder);
+		RequestDispatcher view = request.getRequestDispatcher("viewOrders.jsp");
+		view.forward(request, response);
 		
 	}
 
