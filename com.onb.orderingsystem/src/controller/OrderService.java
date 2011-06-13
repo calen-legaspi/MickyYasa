@@ -34,6 +34,10 @@ public class OrderService {
 		orderDao.payOrder(o);
 	}
 	
+	public static Order retrieveOrderFromDB(int orderNumber){
+		return orderDao.retrieveOrder(orderNumber);
+	}
+	
 	public Set<Order> retrieveOrdersFromDB(Customer c){
 		return orderDao.retrieveOrders(c);
 	}
