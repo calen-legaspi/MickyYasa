@@ -47,6 +47,7 @@ public class TestOrderDAOImpl {
 			for(InventoryItem item:items){
 				o.addItem(new OrderItem(1, item.getProduct()));
 			}
+			orders.add(o);
 			orderDao.addOrder(o);
 		}
 		Set<Order> dbOrders = orderDao.retrieveOrders(testCustomer);

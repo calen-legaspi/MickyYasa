@@ -24,6 +24,7 @@
 		if(request.getAttribute("listOfOrder")!=null){
 			orderList = (HashSet<Order>) request.getAttribute("listOfOrder");
 		}
+		Customer customer  = (Customer)request.getAttribute("customer");
 	   	%>
 		<table border = 1>
 					<tr>
@@ -44,7 +45,7 @@
 						<%= order.getDateofOrderCreation().getTime() %>
 						</td>
 						<td align = "center">
-						<%= order.computeTotalCost().doubleValue()%>
+						<%= order.computeTotalCost(customer.getCreditLimit().intValue()).doubleValue()%>
 						</td>
 						<td align = "center">
 							<input type="submit" value="View" name = "<%= order.getOrderNumber() %>">

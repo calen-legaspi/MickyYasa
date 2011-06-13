@@ -19,19 +19,19 @@ public class Customer {
 		this.id = id;
 		totalPaidOrders = new BigDecimal(0);
 		totalPriceOfOrders = new BigDecimal(0);
-		orders = new HashSet<Order>();
+		setOrders(new HashSet<Order>());
 	}
 	
 	public void addOrder(Order o){
 		if(checkOrder(o)){
-			orders.add(o);
-			totalPriceOfOrders = totalPriceOfOrders.add(o.computeTotalCost());
+			getOrders().add(o);
+			totalPriceOfOrders = totalPriceOfOrders.add(o.computeTotalCost(getCreditLimit().intValue()));
 		}
 	}
 	
 	private boolean checkOrder(Order o){
-		BigDecimal sum = getTotalUnpaidOrders().add(o.computeTotalCost());
-		if(orders.contains(o)){
+		BigDecimal sum = getTotalUnpaidOrders().add(o.computeTotalCost(getCreditLimit().intValue()));
+		if(getOrders().contains(o)){
 			return false;
 		}else if (sum.compareTo(getCreditLimit()) == 1){
 			return false;
@@ -41,12 +41,12 @@ public class Customer {
 	}
 	
 	public void payOrder(Order o){
-		if(orders.contains(o)){
+		if(getOrders().contains(o)){
 			o.update();
-			orders.remove(o);
+			getOrders().remove(o);
 			o.pay();
-			orders.add(o);
-			addToTotalPaidOrders(o.computeTotalCost());
+			getOrders().add(o);
+			addToTotalPaidOrders(o.computeTotalCost(getCreditLimit().intValue()));
 		}
 	}
 	
@@ -75,7 +75,9 @@ public class Customer {
 	@SuppressWarnings("unchecked")
 	public List<Order> getUnpaidOrders(){
 		List<Order> unpaidOrders = new ArrayList<Order>();
-		for(Order o:orders){
+		System.out.println(getOrders().size()+" HELLO");
+		for(Order o:getOrders()){
+			System.out.println(o.getOrderNumber()+" paid?" + o.hasPaid());
 			if(!o.hasPaid())
 				unpaidOrders.add(o);
 		}
@@ -131,6 +133,14 @@ public class Customer {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
+
+	public Set<Order> getOrders() {
+		return orders;
 	}
 
 	

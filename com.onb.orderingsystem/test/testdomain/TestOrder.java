@@ -66,9 +66,9 @@ public class TestOrder {
 		Product testProduct1 = new Product(1929428, "Lotion", new BigDecimal("10.50"));
 		o.addItem(new OrderItem(5, testProduct1));
 		o.update();
-		Assert.assertEquals(0,new BigDecimal("52.5000").compareTo(o.computeTotalCost()));
+		Assert.assertEquals(0,new BigDecimal("52.5000").compareTo(o.computeTotalCost(testCustomer.getCreditLimit().intValue())));
 		o.addItem(new OrderItem(10, testProduct1));
 		o.update();
-		Assert.assertEquals(0,new BigDecimal("157.5").compareTo(o.computeTotalCost()));
+		Assert.assertEquals(0,new BigDecimal("157.5").compareTo(o.computeTotalCost(testCustomer.getCreditLimit().intValue())));
 	}
 }

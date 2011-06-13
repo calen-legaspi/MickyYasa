@@ -6,27 +6,27 @@ import java.util.*;
 public class Order implements Comparable{
 	
 	private int orderNumber;
+
 	public static int increment = 0;
 	private Calendar date;
 	private boolean paid;
+	private int payerID;
 	private List<OrderItem> items;
-	private Customer payer;
 	
-	public Order(Customer payer){
+	public Order(Customer payerID){
 		orderNumber = 1000000+increment;
-		this.payer = payer;
 		increment++;
+		this.payerID = payerID.getID();
 		date = new GregorianCalendar();
 		date.clear(Calendar.MILLISECOND);		//The milliseconds variable makes one unit test fail
 		items = new ArrayList<OrderItem>();
 		paid = false;
 	}
 	
-	public Order(int orderNumber, Customer payer, Date date, boolean paid){
+	public Order(int orderNumber, int payerID, Date date, boolean paid){
 		this.orderNumber = orderNumber;
-		this.payer = payer;
-		increment++;
 		this.date = new GregorianCalendar();
+		this.payerID = payerID;
 		this.date.setTime(date);
 		items = new ArrayList<OrderItem>();
 		this.paid = paid;
@@ -56,11 +56,11 @@ public class Order implements Comparable{
 		items.get(index).addToQuantity(amount);
 	}
 	
-	public BigDecimal computeTotalCost(){
+	public BigDecimal computeTotalCost(int creditLimit){
 		BigDecimal totalCost = new BigDecimal(0);
 		for(OrderItem o: items)
 			totalCost = totalCost.add(o.getCost());
-		if(payer.getCreditLimit().intValue() == 150000)
+		if(creditLimit == 150000)
 			totalCost = totalCost.subtract(totalCost.multiply(new BigDecimal("0.10")));
 		return totalCost;
 	}
@@ -76,10 +76,6 @@ public class Order implements Comparable{
 
 	public int getOrderNumber(){
 		return orderNumber;
-	}
-	
-	public int getCustomerID(){
-		return payer.getID();
 	}
 	
 	@Override
@@ -124,6 +120,10 @@ public class Order implements Comparable{
 		return items;
 	}
 
+	public int getCustomerID(){
+		return payerID;
+	}
+	
 	@Override
 	public int compareTo(Object arg0) {
 		Order o = (Order) arg0;

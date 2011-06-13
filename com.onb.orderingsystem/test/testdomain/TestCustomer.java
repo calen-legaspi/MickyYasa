@@ -76,7 +76,22 @@ public class TestCustomer {
 	
 	@Test
 	public void returnTotalUnpaidOrders(){
-		for(int i = 0; i< 25; i++){
+		for(int i = 0; i< 14; i++){
+			tempOrder = new Order(testCustomer);
+			tempOrder.addItem(new OrderItem(10, new Product(555+i, "Pepsi", new BigDecimal("100.00"))));
+			tempOrder.update();
+			testCustomer.addOrder(tempOrder);
+			if(testCustomer.getOrders().contains(tempOrder))
+				System.out.println(i);
+			if(i%2 ==1)
+				testCustomer.payOrder(tempOrder);
+		}	
+		Assert.assertEquals(new BigDecimal("7000.00"), testCustomer.getTotalUnpaidOrders());
+	}
+	
+	@Test
+	public void returnNumberOfUnpaidOrders(){
+		for(int i = 0; i< 14; i++){
 			tempOrder = new Order(testCustomer);
 			tempOrder.addItem(new OrderItem(10, new Product(555+i, "Pepsi", new BigDecimal("100.00"))));
 			tempOrder.update();
@@ -84,6 +99,6 @@ public class TestCustomer {
 			if(i%2 ==1)
 				testCustomer.payOrder(tempOrder);
 		}	
-		Assert.assertEquals(new BigDecimal("10000.00"), testCustomer.getTotalUnpaidOrders());
+		Assert.assertEquals(7, testCustomer.getUnpaidOrders().size());
 	}
 }
