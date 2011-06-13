@@ -7,6 +7,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="style.css" /> 
 <title>Ordering System</title>
+<script type="text/javascript">
+	function viewOrderDetails(index){
+		var form = document.createElement("form");
+		form.setAttribute("method", "post");
+		form.setAttribute("action","OrderDetails");
+		var idField = 	document.createElement("input");
+		idField.setAttribute("type", "hidden");
+		idField.setAttribute("name", "orderIndex");
+		idField.setAttribute("value", index);
+		form.appendChild(idField);
+		document.body.appendChild(form);
+		form.submit();
+	}
+</script>
+
 </head>
 <body>
 <div id="bg">
@@ -20,7 +35,7 @@
      	
      		<h2>Order History</h2>
      		<center>
-			<form method = "POST" action = "OrderDetails">
+			<form method = "POST" action = "OrderDetails" enctype="application/x-www-form-urlencoded">
 			
 			<%
 			Set<Order> orderList = new HashSet<Order>();
@@ -45,7 +60,6 @@
 				<tr>
 					<td align = "center">
 						<%= orderNumber%>
-						
 					</td>
 					<td align = "center">
 						<%= order.getDateofOrderCreation().getTime() %>
@@ -54,9 +68,7 @@
 						<%= order.computeTotalCost(customer.getCreditLimit().intValue()).doubleValue()%>
 					</td>
 					<td align = "center">
-						<input type = "submit" name = "<%= orderNumber %>" value = "View" />
-						<input type = "hidden" value = "<%= orderNumber%>" name = "orderNum"/>
-						
+						<input type = "button" name = "View" value = "View Order Details" onclick = "viewOrderDetails(<%= order.getOrderNumber() %>)" />
 					</td>
 						
 				</tr>

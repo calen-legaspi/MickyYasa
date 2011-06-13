@@ -1,29 +1,26 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.*;
-import domainmodel.*;
+import controller.OrderService;
+import domainmodel.Order;
 
 /**
- * Servlet implementation class OrderDetails
+ * Servlet implementation class UpdateOrderStatus
  */
-@WebServlet("/OrderDetails")
-public class OrderDetails extends HttpServlet {
+@WebServlet("/UpdateOrderStatus")
+public class UpdateOrderStatus extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OrderDetails() {
+    public UpdateOrderStatus() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +29,7 @@ public class OrderDetails extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -40,19 +37,13 @@ public class OrderDetails extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int selectedOrderNumber = Integer.parseInt(request.getParameter("orderIndex"));
-		System.out.println("hello world");
+		System.out.println(selectedOrderNumber);
 		OrderService orderService = new OrderService();
 		
 		Order order = orderService.retrieveOrderFromDB(selectedOrderNumber);
-		
-		List<OrderItem> listOfOrderItems = order.getItems();
-		
-		request.setAttribute("listOfOrderItems", listOfOrderItems);
-
-			
-		RequestDispatcher view = request.getRequestDispatcher("orderDetails.jsp");
-		view.forward(request, response);
-		
+	
+		order.pay();
+		orderService.updateStatusOfOrderInDB(order);
 	}
 
 }

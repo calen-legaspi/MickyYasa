@@ -7,6 +7,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="style.css" /> 
 <title>Ordering System</title>
+<script type="text/javascript">
+	function payOrder(index){
+		var form = document.createElement("form");
+		form.setAttribute("method", "post");
+		form.setAttribute("action","UpdateOrderStatus");
+		var idField = 	document.createElement("input");
+		idField.setAttribute("type", "hidden");
+		idField.setAttribute("name", "orderIndex");
+		idField.setAttribute("value", index);
+		form.appendChild(idField);
+		document.body.appendChild(form);
+		form.submit();
+	}
+</script>
 </head>
 <body>
 <div id="bg">
@@ -22,7 +36,7 @@
      		
      		<center>
 			
-			<form method = "POST" action = "OrderDetails">
+			<form method = "POST" action = "UpdateOrderStatus" enctype="application/x-www-form-urlencoded">
 			
 			<%		
 			Set<Order> orderList = new HashSet<Order>();
@@ -35,6 +49,7 @@
 			
 			<table border = 1>
 				<tr>
+					<td align = "center">Order Number</td>
 					<td align = "center">Order Date</td>
 					<td align = "center">Total Cost</td>
 					<td align = "center">Action</td>
@@ -42,9 +57,12 @@
 		
 				<% for(Order order : orderList){ %>
 					<tr>
+						<td align = "center"><%= order.getOrderNumber() %></td>
 						<td align = "center"><%= order.getDateofOrderCreation().getTime() %></td>
 						<td align = "center"><%= order.computeTotalCost(customer.getCreditLimit().intValue()).doubleValue()%></td>
-						<td align = "center"><input type="submit" value="Pay" name = "<%= order.getOrderNumber() %>"></td>
+						<td align = "center">
+							<input type="button" value="Pay" name = "Pay" onclick = "payOrder(<%= order.getOrderNumber() %>)" />
+						</td>
 					</tr>
 				<% } %>
 			</table>
