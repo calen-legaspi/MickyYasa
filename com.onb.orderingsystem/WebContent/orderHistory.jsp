@@ -10,7 +10,7 @@
 <body>
 	<center>
 	<img src = "images/os.png">
-	<form method = "GET" action = "ViewOrders">
+	<form method = "POST" action = "ViewOrders">
 	<br/>
 	<br/>
 

@@ -36,19 +36,7 @@ public class ViewOrders extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			int selectedCustomer = Integer.parseInt(request.getParameter("customer"));
 			
-			CustomerService customerService = new CustomerService();
-			Customer customer = customerService.getCustomer(selectedCustomer);
-			
-			OrderService orderService = new OrderService();		
-			Set<Order> listOfOrder = (HashSet<Order>) orderService.retrieveOrdersFromDB(customer);
-			
-			request.setAttribute("listOfOrder", listOfOrder);
-			request.setAttribute("customer", customer);
-			RequestDispatcher view = request.getRequestDispatcher("viewOrders.jsp");
-			view.forward(request, response);
-		
 	}
 	
 
@@ -56,7 +44,18 @@ public class ViewOrders extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int selectedCustomer = Integer.parseInt(request.getParameter("customer"));
 		
+		CustomerService customerService = new CustomerService();
+		Customer customer = customerService.getCustomer(selectedCustomer);
+		
+		OrderService orderService = new OrderService();		
+		Set<Order> listOfOrder = (HashSet<Order>) orderService.retrieveOrdersFromDB(customer);
+		
+		request.setAttribute("listOfOrder", listOfOrder);
+		request.setAttribute("customer", customer);
+		RequestDispatcher view = request.getRequestDispatcher("viewOrders.jsp");
+		view.forward(request, response);
 	}
 
 }
