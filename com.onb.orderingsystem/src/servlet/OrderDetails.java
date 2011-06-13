@@ -47,6 +47,7 @@ public class OrderDetails extends HttpServlet {
 		List<OrderItem> listOfOrderItems = order.getItems();
 		
 		request.setAttribute("listOfOrderItems", listOfOrderItems);
+
 			
 		RequestDispatcher view = request.getRequestDispatcher("orderDetails.jsp");
 		view.forward(request, response);

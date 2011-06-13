@@ -21,7 +21,7 @@
 		
 		List<OrderItem> orderItemList = new ArrayList<OrderItem>();
 		if(request.getAttribute("listOfOrderItems")!=null){
-			orderItemList = (ArrayList<OrderItem>) request.getAttribute("listOfOrderItem");
+			orderItemList = (ArrayList<OrderItem>) request.getAttribute("listOfOrderItems");
 		}
 
 	   	%>
@@ -39,7 +39,8 @@
 						</td>
 					</tr>
 		
-			<% for(OrderItem orderItem : orderItemList){  %>
+			<% if(orderItemList != null){
+				for(OrderItem orderItem : orderItemList){  %>
 					
 					<tr>
 						<td align = "center">
@@ -53,7 +54,8 @@
 						</td>
 						
 					</tr>
-			<% } %>
+			<% }
+			}%>
 		</table>
 	</form>	 
 	 
