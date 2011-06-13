@@ -22,4 +22,13 @@
     <servlet-name>CreateOrder</servlet-name>
     <url-pattern>/CreateOrder</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <servlet-name>OrderHistory</servlet-name>
+    <servlet-class>servlet.OrderHistory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderHistory</servlet-name>
+    <url-pattern>/OrderHistory</url-pattern>
+  </servlet-mapping>
 </web-app>
