@@ -41,6 +41,7 @@ public class CreateOrder extends HttpServlet {
 		InventoryService inventory = new InventoryService();
 		List<InventoryItem> items = inventory.getAllAvailableProductsInDB();
 		session.setAttribute("listOfProductsInStock", items);
+		session.setAttribute("lastOrderNumber", OrderService.getLastOrderNumber());
 		RequestDispatcher view = request.getRequestDispatcher("createOrder.jsp");
 		view.forward(request, response);
 	}
@@ -69,6 +70,13 @@ public class CreateOrder extends HttpServlet {
 			OrderService.deleteOrderItem(order, itemIndex);
 			session.setAttribute("order", order);
 		}
+		if(isAddOrderButtonClicked(request.getParameter("Add"))){
+			Order order = getOrder(request);	
+			OrderService.addOrderToDB(order);
+			session.removeAttribute("order");
+			session.removeAttribute("customer");
+			session.setAttribute("lastOrderNumber", OrderService.getLastOrderNumber());
+		}
 		RequestDispatcher view = request.getRequestDispatcher("createOrder.jsp");
 		view.forward(request, response);
 	}
@@ -77,7 +85,9 @@ public class CreateOrder extends HttpServlet {
 		HttpSession session = request.getSession();
 		Order order = (Order)session.getAttribute("order");
 		if(order == null){
-			return new Order((Customer)session.getAttribute("customer"));
+			Customer customer = (Customer)session.getAttribute("customer");
+			int orderNumber = Integer.valueOf(session.getAttribute("lastOrderNumber").toString());
+			return new Order(customer, orderNumber+1);
 		}else return order;	
 	}
 	
@@ -92,11 +102,19 @@ public class CreateOrder extends HttpServlet {
 	}
 	
 	private boolean isDeleteButtonClicked(String requestParameter){
-		if(requestParameter == null)
+		if(requestParameter == null){
 			return false;
-		else if (requestParameter.contains("Delete"))
+		}else if (requestParameter.contains("Delete")){
 			return true;
-		else return false;
+		}else return false;
+	}
+	
+	private boolean isAddOrderButtonClicked(String requestParameter){
+		if(requestParameter == null){
+			return false;
+		}else if(requestParameter.contains("Add Order")){
+			return true;
+		}else return false;
 	}
 
 }

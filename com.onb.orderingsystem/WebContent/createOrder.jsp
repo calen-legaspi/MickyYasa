@@ -38,18 +38,21 @@
 		<input type="submit" name = "addorders" value="Add Order" style="height: 20px; "><br><br><br>
 		Orders:
 		<br>
-		<table border = "1">
-			<tr>
-				<td width="200" align="center">Name</td>
-				<td>Quantity</td>
-				<td width = "200" align = "center">Price</td>
-				<td width = "200px"></td>
-			</tr>
+		
 			<% if(session.getAttribute("order") != null){
 				Order order = (Order)session.getAttribute("order");
 				List<OrderItem> orderItems = order.getItems();
-				for(OrderItem orderitem: orderItems){
+				%>
+				<table border = "1">
+					<tr>
+						<td width="200" align="center">Name</td>
+						<td>Quantity</td>
+						<td width = "200" align = "center">Price</td>
+						<td width = "200px"></td>
+					</tr>
+				<% for(OrderItem orderitem: orderItems){
 					%>
+					
 					<tr>
 						<td width="200" align="center"><%=orderitem.getProductName() %></td>
 						<td><%= orderitem.getQuantity() %></td>
@@ -60,10 +63,20 @@
 						</td>
 					</tr>
 				<%}%>
-		</table>
+				</table>
 				<p> Total Price: <%=order.computeTotalCost(credLimit).doubleValue()%></p>
-			<%}%>
-			<input type = "submit" name = "Add" value="Add Order">
+			<%}else{%>
+				<table border = "1">
+					<tr>
+						<td width="200" align="center">Name</td>
+						<td>Quantity</td>
+						<td width = "200" align = "center">Price</td>
+						<td width = "200px"></td>
+					</tr>
+				</table>
+			<%} %>
+			
+		<p><input type = "submit" name = "Add" value="Add Order"></p>
 		</form>
 		 
 </body>

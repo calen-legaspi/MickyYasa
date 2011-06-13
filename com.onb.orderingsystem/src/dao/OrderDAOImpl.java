@@ -71,4 +71,10 @@ public class OrderDAOImpl implements OrderDAO {
 		return orders.get(0);
 	}
 
+	@Override
+	public int getLastOrderNumber() {
+		String sql = "select MAX(Order_Number) from CustomerOrder";
+		return jdbcTemplate.queryForInt(sql);
+	}
+
 }

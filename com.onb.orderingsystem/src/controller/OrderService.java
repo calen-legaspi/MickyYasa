@@ -22,6 +22,10 @@ public class OrderService {
 	public static void addAllOfCustomersOrdersToDB(Customer c){
 	}
 	
+	public static int getLastOrderNumber(){
+		return orderDao.getLastOrderNumber();
+	}
+	
 	public static void addOrderToDB(Order o) {
 		orderDao.addOrder(o);
 	}

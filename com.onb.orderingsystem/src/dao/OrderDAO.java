@@ -10,6 +10,8 @@ public interface OrderDAO {
 	
 	public void payOrder(Order o);
 	
+	public int getLastOrderNumber();
+	
 	public Order retrieveOrder(int id);
 	
 	public Set<Order> retrieveOrders(Customer c);

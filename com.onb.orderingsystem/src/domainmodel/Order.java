@@ -24,6 +24,15 @@ public class Order implements Comparable,Serializable{
 		paid = false;
 	}
 	
+	public Order(Customer payerID, int orderNumber){
+		this.orderNumber = orderNumber;
+		this.payerID = payerID.getID();
+		date = new GregorianCalendar();
+		date.clear(Calendar.MILLISECOND);		//The milliseconds variable makes one unit test fail
+		items = new ArrayList<OrderItem>();
+		paid = false;
+	}
+	
 	public Order(int orderNumber, int payerID, Date date, boolean paid){
 		this.orderNumber = orderNumber;
 		this.date = new GregorianCalendar();
