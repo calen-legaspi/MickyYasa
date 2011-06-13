@@ -16,42 +16,43 @@
 	<h2>
 	Orders
 	</h2>
-	 
-	<%
-	
-	Set<Order> orderList = new HashSet<Order>();
-	if(request.getAttribute("listOfOrder")!=null){
-		orderList = (HashSet<Order>) request.getAttribute("listOfOrder");
-	}
-   	%>
-	<table border = 1>
-				<tr>
-					<td align = "center">
-						Order Date
-					</td>
-					<td align = "center">
-						Total Cost
-					</td>
-					<td align = "center">
-						Action
-					</td>
-				</tr>
-	
-		<% for(Order order : orderList){ %>
-				<tr>
-					<td align = "center">
-					<%= order.getDateofOrderCreation().getTime() %>
-					</td>
-					<td align = "center">
-					<%= order.computeTotalCost().doubleValue()%>
-					</td>
-					<td align = "center">
-						<input type="submit" value="View" name = "<%= order.getOrderNumber() %>">
-					</td>
-				</tr>
-		<% } %>
-	</table>
-	
+
+	<form method = "POST" action = "OrderDetails">
+		<%
+		
+		Set<Order> orderList = new HashSet<Order>();
+		if(request.getAttribute("listOfOrder")!=null){
+			orderList = (HashSet<Order>) request.getAttribute("listOfOrder");
+		}
+	   	%>
+		<table border = 1>
+					<tr>
+						<td align = "center">
+							Order Date
+						</td>
+						<td align = "center">
+							Total Cost
+						</td>
+						<td align = "center">
+							Action
+						</td>
+					</tr>
+		
+			<% for(Order order : orderList){ %>
+					<tr>
+						<td align = "center">
+						<%= order.getDateofOrderCreation().getTime() %>
+						</td>
+						<td align = "center">
+						<%= order.computeTotalCost().doubleValue()%>
+						</td>
+						<td align = "center">
+							<input type="submit" value="View" name = "<%= order.getOrderNumber() %>">
+						</td>
+					</tr>
+			<% } %>
+		</table>
+	</form>	 
 	 
 	</center>
 
