@@ -40,7 +40,7 @@
 		<% for(Order order : orderList){ %>
 				<tr>
 					<td align = "center">
-					<%= order.getDateofOrderCreation() %>
+					<%= order.getDateofOrderCreation()%>
 					</td>
 					<td align = "center">
 					<%= order.getTotalCost() %>
