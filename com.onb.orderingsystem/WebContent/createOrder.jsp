@@ -10,11 +10,22 @@
 <body>
 	<form action="CreateOrder" method="post">
 		<center><img></center>
-		Customer ID: <input name = "customerid" style="height: 33px; ">
-		<br>
-		<br>
-		<br>
-		Product: <select name = "products" style="width: 170px; height: 32px">
+		Customer ID: 
+		<% 	int credLimit =0;
+			if(session.getAttribute("customer")!=null) {
+			Customer customer = (Customer)session.getAttribute("customer");
+			credLimit = customer.getCreditLimit().intValue();
+		%>
+			<input type="text" name = "customerid" value = "<%=customer.getID()%>"style="height: 20px; ">
+			<br><br>
+			<p>Name: <%=customer.getLastName()%>, <%=customer.getFirstName()%> <%=customer.getMiddleName() %></p>
+		<%} else {%>
+			<input type="text" name = "customerid" style="height: 20px; ">
+			<br><br>
+		<%} %>
+		
+		<br><br>
+		Product: <select name = "products" style="width: 170px; height: 20px">
 			<option value="none">Select Product</option>
 		<% if(session.getAttribute("listOfProductsInStock") !=null){ 
 			List<InventoryItem> items = (List<InventoryItem>)session.getAttribute("listOfProductsInStock");
@@ -23,9 +34,8 @@
 			<% }
 		}%>
 		</select>     
-		Quantity: <input name = "quantity" style="height: 33px; ">   
-		<input type="submit" name = "addorders" value="Add Order" style="height: 32px; "><br><br><br>
-		</form>
+		Quantity: <input type="text" name = "quantity" style="height: 20px; ">   
+		<input type="submit" name = "addorders" value="Add Order" style="height: 20px; "><br><br><br>
 		Orders:
 		<br>
 		<table border = "1">
@@ -35,23 +45,26 @@
 				<td width = "200" align = "center">Price</td>
 				<td width = "200px"></td>
 			</tr>
-			<% if(session.getAttribute("listOfOrderedItems") != null){
-				List<OrderItem> orderitems = (List<OrderItem>) session.getAttribute("listOfOrderedItems");
-				for(OrderItem orderitem: orderitems){
+			<% if(session.getAttribute("order") != null){
+				Order order = (Order)session.getAttribute("order");
+				List<OrderItem> orderItems = order.getItems();
+				for(OrderItem orderitem: orderItems){
 					%>
 					<tr>
 						<td width="200" align="center"><%=orderitem.getProductName() %></td>
 						<td><%= orderitem.getQuantity() %></td>
 						<td width = "200" align = "center"><%=orderitem.getProductPrice().doubleValue() %></td>
 						<td width = "200px">
-							<form>
+							<input type = "hidden" name = "orderIndex" value = "<%=orderItems.indexOf(orderitem)%>">
 							<input type = "submit" name = "deleteitem" value = "Delete">
-							</form>
 						</td>
 					</tr>
-				<%}
-			}%>
+				<%}%>
 		</table>
-	
+				<p> Total Price: <%=order.computeTotalCost(credLimit).doubleValue()%></p>
+			<%}%>
+			<input type = "submit" name = "Add" value="Add Order">
+		</form>
+		 
 </body>
 </html>

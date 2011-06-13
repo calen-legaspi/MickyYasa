@@ -1,6 +1,7 @@
 package controller;
 
-import java.util.Set;
+
+import java.util.*;
 
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -31,6 +32,12 @@ public class OrderService {
 	
 	public Set<Order> retrieveOrdersFromDB(Customer c){
 		return orderDao.retrieveOrders(c);
+	}
+	
+	public static void deleteOrderItem(Order order, int itemIndex){
+		List<OrderItem> items = order.getItems();
+		OrderItem itemToBeRemoved = items.get(itemIndex);
+		order.deleteItem(itemToBeRemoved);
 	}
 
 	public static Customer addOrdersFromDB(Customer c) {

@@ -9,18 +9,18 @@ import dao.CustomerDAO;
 import domainmodel.Customer;
 
 public class CustomerService {
-	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
-	CustomerDAO customerDao = (CustomerDAO)ctx.getBean("CustomerDao");
+	static ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
+	static CustomerDAO customerDao = (CustomerDAO)ctx.getBean("CustomerDao");
 
-	public List<Customer> getCustomerList(){
+	public static List<Customer> getCustomerList(){
 		return customerDao.retrieveCustomerList();
 	}
 	
-	public List<Customer> getCustomerWithUnpaidOrders(){
+	public static List<Customer> getCustomerWithUnpaidOrders(){
 		return customerDao.retrieveUnpaidCustomerList();
 	}
 	
-	public Customer getCustomer(int id){
+	public static Customer getCustomer(int id){
 		return customerDao.retrieveCustomer(id);
 	}
 }

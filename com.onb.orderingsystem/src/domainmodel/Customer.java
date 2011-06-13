@@ -43,7 +43,7 @@ public class Customer implements Serializable{
 	
 	public void payOrder(Order o){
 		if(getOrders().contains(o)){
-			o.update();
+			o.consolidateItems();
 			getOrders().remove(o);
 			o.pay();
 			getOrders().add(o);
