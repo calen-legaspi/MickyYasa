@@ -6,7 +6,6 @@ import java.util.*;
 public class Order implements Comparable{
 	
 	private int orderNumber;
-	private BigDecimal totalCost;
 	public static int increment = 0;
 	private Calendar date;
 	private boolean paid;
@@ -31,18 +30,15 @@ public class Order implements Comparable{
 		this.date.setTime(date);
 		items = new ArrayList<OrderItem>();
 		this.paid = paid;
-		computeTotalCost();
 	}
 	
 	public void addItem(OrderItem o){
 		items.add(o);
-		computeTotalCost();
 	}
 	
 	public void deleteItem(OrderItem o){
 		if(items.contains(o)){
 			items.remove(o);
-			computeTotalCost();
 		}
 	}
 	
@@ -54,24 +50,21 @@ public class Order implements Comparable{
 			else newOrderList.add(i);
 		}
 		items = newOrderList;
-		computeTotalCost();
 	}
 	
 	private void updateOrderItem(int index, int amount){
 		items.get(index).addToQuantity(amount);
 	}
 	
-	private void computeTotalCost(){
-		totalCost = new BigDecimal(0);
+	public BigDecimal computeTotalCost(){
+		BigDecimal totalCost = new BigDecimal(0);
 		for(OrderItem o: items)
 			totalCost = totalCost.add(o.getCost());
 		if(payer.getCreditLimit().intValue() == 150000)
 			totalCost = totalCost.subtract(totalCost.multiply(new BigDecimal("0.10")));
-	}
-	
-	public BigDecimal getTotalCost(){
 		return totalCost;
 	}
+
 	
 	public void pay(){
 		paid = true;

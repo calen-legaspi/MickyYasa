@@ -43,7 +43,7 @@
 					<%= order.getDateofOrderCreation().getTime() %>
 					</td>
 					<td align = "center">
-					<%= order.getTotalCost() %>
+					<%= order.computeTotalCost().doubleValue()%>
 					</td>
 					<td align = "center">
 						<input type="submit" value="View" name = "<%= order.getOrderNumber() %>">

@@ -25,12 +25,12 @@ public class Customer {
 	public void addOrder(Order o){
 		if(checkOrder(o)){
 			orders.add(o);
-			totalPriceOfOrders = totalPriceOfOrders.add(o.getTotalCost());
+			totalPriceOfOrders = totalPriceOfOrders.add(o.computeTotalCost());
 		}
 	}
 	
 	private boolean checkOrder(Order o){
-		BigDecimal sum = getTotalUnpaidOrders().add(o.getTotalCost());
+		BigDecimal sum = getTotalUnpaidOrders().add(o.computeTotalCost());
 		if(orders.contains(o)){
 			return false;
 		}else if (sum.compareTo(getCreditLimit()) == 1){
@@ -46,7 +46,7 @@ public class Customer {
 			orders.remove(o);
 			o.pay();
 			orders.add(o);
-			addToTotalPaidOrders(o.getTotalCost());
+			addToTotalPaidOrders(o.computeTotalCost());
 		}
 	}
 	
