@@ -31,7 +31,7 @@
     <servlet-name>OrderHistory</servlet-name>
     <url-pattern>/OrderHistory</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <description></description>
     <servlet-name>Payment</servlet-name>
     <servlet-class>servlet.Payment</servlet-class>
