@@ -8,7 +8,7 @@ import resultretrieval.*;
 
 import domainmodel.*;
 
-class OrderItemDAOImpl implements OrderItemDAO {
+public class OrderItemDAOImpl implements OrderItemDAO {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
