@@ -24,6 +24,8 @@ public class TestInventoryItem {
 	@Test
 	public void testSuccessfulDeclaration(){
 		InventoryItem test = new InventoryItem(100,testProduct);
+		Assert.assertEquals(1, test.getSKUNumber());
+		Assert.assertEquals(100, test.getQuantity());
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
@@ -40,6 +42,7 @@ public class TestInventoryItem {
 	public void testDeduction(){
 		InventoryItem test = new InventoryItem(100,testProduct);
 		test.deduct(50);
+		Assert.assertEquals(50, test.getQuantity());
 	}
 	
 	@Test (expected = ArithmeticException.class)

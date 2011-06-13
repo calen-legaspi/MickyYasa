@@ -15,7 +15,10 @@ public class Customer implements Serializable{
 	private BigDecimal totalPriceOfOrders;	
 	private Set<Order> orders;
 	
-	
+	/**
+	 * Creates a new instance of Object Customer with identifier id
+	 * @param id - the id of the customer
+	 */
 	public Customer(int id){
 		this.id = id;
 		totalPaidOrders = new BigDecimal(0);
@@ -23,6 +26,11 @@ public class Customer implements Serializable{
 		setOrders(new HashSet<Order>());
 	}
 	
+
+	/**
+	 * Adds a new order to the customer's list of orders
+	 * @param order - the order to be added
+	 */
 	public void addOrder(Order o){
 		if(checkOrder(o)){
 			getOrders().add(o);
@@ -41,6 +49,10 @@ public class Customer implements Serializable{
 		}
 	}
 	
+	/**
+	 *  Sets the order's status to paid. It checks first if the order is in the customer's set of orders before doing anything else.
+	 * @param order - the order to be added 
+	 */
 	public void payOrder(Order o){
 		if(getOrders().contains(o)){
 			o.consolidateItems();
@@ -55,6 +67,10 @@ public class Customer implements Serializable{
 		totalPaidOrders = totalPaidOrders.add(amount);
 	}
 	
+	/**
+	 * Gets the customer's current credit limit based on the accumulated amount he/she has paid 
+	 * @return the credit limit
+	 */
 	public BigDecimal getCreditLimit(){
 		if (totalPaidOrders.compareTo(new BigDecimal(100000)) ==-1)
 			return new BigDecimal(10000);
@@ -65,20 +81,22 @@ public class Customer implements Serializable{
 		else return new BigDecimal(150000);
 	}
 	
+	/**
+	 * 
+	 * @return the id
+	 */
 	public int getID(){
 		return id;
 	}
-	
-	public String getName(){
-		return lastName+", "+firstName+" "+middleName;
-	}
 
+	/**
+	 * Gets all of the unpaid orders the customer currently has
+	 * @return sorted list of unpaid orders
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Order> getUnpaidOrders(){
 		List<Order> unpaidOrders = new ArrayList<Order>();
-		System.out.println(getOrders().size()+" HELLO");
 		for(Order o:getOrders()){
-			System.out.println(o.getOrderNumber()+" paid?" + o.hasPaid());
 			if(!o.hasPaid())
 				unpaidOrders.add(o);
 		}
@@ -86,6 +104,10 @@ public class Customer implements Serializable{
 		return unpaidOrders;
 	}
 	
+	/**
+	 * Gets the total amount of the unpaid orders
+	 * @return the 
+	 */
 	public BigDecimal getTotalUnpaidOrders(){
 		return totalPriceOfOrders.subtract(totalPaidOrders);
 	}

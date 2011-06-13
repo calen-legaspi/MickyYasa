@@ -38,9 +38,9 @@ public class CreateOrder extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		InventoryService inventory = new InventoryService();
-		List<InventoryItem> items = inventory.getAllAvailableProductsInDB();
-		session.setAttribute("listOfProductsInStock", items);
+		List<InventoryItem> items = InventoryService.getAllAvailableProductsInDB();
+		Inventory inventory = new Inventory(items);
+		session.setAttribute("inventory", inventory);
 		session.setAttribute("lastOrderNumber", OrderService.getLastOrderNumber());
 		RequestDispatcher view = request.getRequestDispatcher("createOrder.jsp");
 		view.forward(request, response);
@@ -61,23 +61,28 @@ public class CreateOrder extends HttpServlet {
 			if(customer !=null){
 				session.setAttribute("customer", customer);
 				Order order = getOrder(request);
-				List<InventoryItem> inventoryitems = (List<InventoryItem>)session.getAttribute("listOfProductsInStock");
 				int quantity = Integer.valueOf(request.getParameter("quantity"));
 				int productNumber = Integer.valueOf(request.getParameter("products"));
 				Product product = ProductService.getProduct(productNumber);
-				OrderItem orderItem = new OrderItem(quantity,product); 
-				order.addItem(orderItem);				
-				session.setAttribute("order", order);
+				Inventory inventory = (Inventory)session.getAttribute("inventory");
+				InventoryItem item = InventoryService.getInventoryItem(inventory, product);
+				if(InventoryService.checkQuantity(item, quantity)){
+					inventory.deduct(item, quantity);
+					OrderItem orderItem = new OrderItem(quantity,product); 
+					order.addItem(orderItem);	
+					session.setAttribute("order", order);
+					session.setAttribute("inventory", inventory);
+				}
 			}
 		}else if(isAddOrderButtonClicked(request.getParameter("Add"))){
 			Order order = getOrder(request);	
 			OrderService.addOrderToDB(order);
-			session.removeAttribute("order");
 			session.removeAttribute("customer");
-			session.setAttribute("lastOrderNumber", OrderService.getLastOrderNumber());
+			session.removeAttribute("order");
 		}
 		RequestDispatcher view = request.getRequestDispatcher("createOrder.jsp");
 		view.forward(request, response);
+		
 	}
 	
 	private Order getOrder(HttpServletRequest request){

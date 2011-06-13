@@ -62,7 +62,7 @@ public class OrderItem implements Serializable{
 		return product.getName();
 	}
 
-	public int getPriceSKUNumber(){
+	public int getItemSKUNumber(){
 		return product.getSKUNumber();
 	}
 	

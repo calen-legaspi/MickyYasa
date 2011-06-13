@@ -10,16 +10,22 @@
 <script type="text/javascript">
 	function deleteItem(index){
 		var form = document.createElement("form");
+		
 		form.setAttribute("method", "post");
 		form.setAttribute("action","CreateOrder");
+		
 		var idField = 	document.createElement("input");
+		
 		idField.setAttribute("type", "hidden");
 		idField.setAttribute("name", "orderIndex");
 		idField.setAttribute("value", index);
+		
 		form.appendChild(idField);
 		document.body.appendChild(form);
+		
 		form.submit();
 	}
+	
 </script>
 <body>
 	<form action="CreateOrder" method="post" enctype="application/x-www-form-urlencoded">
@@ -41,8 +47,9 @@
 		<br><br>
 		Product: <select name = "products" style="width: 170px; height: 20px">
 			<option value="none">Select Product</option>
-		<% if(session.getAttribute("listOfProductsInStock") !=null){ 
-			List<InventoryItem> items = (List<InventoryItem>)session.getAttribute("listOfProductsInStock");
+		<% if(session.getAttribute("inventory") !=null){ 
+			Inventory inventory = (Inventory) session.getAttribute("inventory");
+			List<InventoryItem> items = inventory.getAllItemsInStock();
 			for(InventoryItem product : items){ %>
 				<option value="<%=product.getSKUNumber()%>"><%=product.getProductName() %></option>
 			<% }

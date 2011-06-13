@@ -11,10 +11,18 @@ public class Inventory implements Serializable{
 		items = new ArrayList<InventoryItem>();
 	}
 	
-	public Inventory(ArrayList<InventoryItem> items){
+	public Inventory(List<InventoryItem> items){
 		if(items.size() == 0)
 			throw new IllegalArgumentException("Items parameter has an empty arraylist");
 		this.items = items;
+	}
+	
+	public InventoryItem getItem(Product product){
+		for(InventoryItem i:items){
+			if(i.getProduct().equals(product))
+				return i;
+		}
+		return null;
 	}
 	
 	public void deduct(InventoryItem i, int amount){

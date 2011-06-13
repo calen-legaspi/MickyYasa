@@ -6,7 +6,7 @@ import java.util.*;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import dao.OrderDAO;
+import dao.*;
 import domainmodel.*;
 
 
@@ -28,6 +28,13 @@ public class OrderService {
 	
 	public static void addOrderToDB(Order o) {
 		orderDao.addOrder(o);
+		List<OrderItem> items = o.getItems();
+		Inventory inventory = new Inventory(InventoryService.getAllAvailableProductsInDB());
+		for(OrderItem i: items){
+			Product product = ProductService.getProduct(i.getItemSKUNumber());
+			InventoryItem inventoryitem = InventoryService.getInventoryItem(inventory,product);
+			InventoryService.deductFromInventory(inventory, inventoryitem, i.getQuantity());
+		}
 	}
 
 	public static void updateStatusOfOrderInDB(Order o) {

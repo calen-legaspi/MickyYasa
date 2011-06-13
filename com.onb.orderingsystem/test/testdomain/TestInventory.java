@@ -31,6 +31,9 @@ public class TestInventory {
 	@Test
 	public void testSuccessfulDeclaration(){
 		Inventory test = new Inventory(items);
+		for(InventoryItem i:items){
+			Assert.assertTrue(test.getAllItemsInStock().contains(i));
+		}
 	}
 
 	@Test (expected = IllegalArgumentException.class)

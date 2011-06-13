@@ -20,6 +20,8 @@ public class TestOrderItem {
 	@Test
 	public void testSuccessfulDeclaration(){
 		OrderItem test = new OrderItem(5, testProduct);
+		Assert.assertEquals(232323, test.getItemSKUNumber());
+		Assert.assertEquals(5, test.getQuantity());
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
