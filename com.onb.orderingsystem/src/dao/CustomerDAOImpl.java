@@ -60,7 +60,6 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 
-	@Override
 	public Customer retrieveCustomer(int id) {
 		String sql = "select * from Customer where ID = ?";
 		Object[] params = {id};

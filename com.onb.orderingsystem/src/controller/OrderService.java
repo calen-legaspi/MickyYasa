@@ -14,7 +14,7 @@ public class OrderService {
 	static OrderDAO orderDao = (OrderDAO)ctx.getBean("OrderDao");
 	
 
-	private OrderService(){
+	public OrderService(){
 		
 	}
 
