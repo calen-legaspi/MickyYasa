@@ -1,10 +1,11 @@
 package domainmodel;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 
 
-public class Customer {
+public class Customer implements Serializable{
 	
 	private int id;
 	private String lastName;

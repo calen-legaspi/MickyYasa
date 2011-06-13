@@ -15,4 +15,5 @@ public class InventoryService {
 		List<InventoryItem>  inventoryItem = inventoryDao.retrieveAvailableProducts();
 		return inventoryItem;
 	}
+	
 }

@@ -1,8 +1,9 @@
 package domainmodel;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Product {
+public class Product implements Serializable {
 
 	private int skuNumber;
 	private String name;

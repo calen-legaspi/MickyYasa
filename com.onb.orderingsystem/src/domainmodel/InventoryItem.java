@@ -1,6 +1,8 @@
 package domainmodel;
 
-public class InventoryItem {
+import java.io.Serializable;
+
+public class InventoryItem implements Serializable{
 	
 	private int quantity;
 	private Product product;
