@@ -53,7 +53,7 @@ li.c {width:128px; padding-left: 2px;}
 li.d {width:144px; padding-left: 2px;}
 
 /* content */
-#footer  { margin:0 20px}
+#footer  { margin:0 20px; margin-top:190px}
 #content {background:url(images/ct_bg.gif) repeat-y; width:503px;  }
 
 #content h2{font-size:24px; margin:15px 25px}
@@ -64,8 +64,10 @@ li.d {width:144px; padding-left: 2px;}
 #side h3 {color: #FEBF01; font-size:16px; margin:20px 0 0 5px}
 #side li {list-style:inside circle; line-height:22px}
 
+.sidefl{float:right;}
+
 .sinner { margin-left:2px}
-#sider {background:url(images/sbox_t.gif) no-repeat; width:21px; height:20px;margin:122px 0 0 0px;}
+#sider {background:url(images/sbox_t.gif) no-repeat; margin-left:25px;width:21px; height:20px;margin:122px 0 0 0px;}
 .sdinner{background: url(images/sbox_bg.gif); width:21px;margin-top: 20px;height:720px; display:block}
 .leftbar {margin-bottom:20px}
 .lb { margin:80px 0 0 50px; display:inline}

@@ -41,7 +41,6 @@ public class CreateOrder extends HttpServlet {
 		List<InventoryItem> items = InventoryService.getAllAvailableProductsInDB();
 		Inventory inventory = new Inventory(items);
 		session.setAttribute("inventory", inventory);
-		session.setAttribute("lastOrderNumber", OrderService.getLastOrderNumber());
 		RequestDispatcher view = request.getRequestDispatcher("createOrder.jsp");
 		view.forward(request, response);
 	}
@@ -71,7 +70,6 @@ public class CreateOrder extends HttpServlet {
 					OrderItem orderItem = new OrderItem(quantity,product); 
 					order.addItem(orderItem);	
 					session.setAttribute("order", order);
-					session.setAttribute("inventory", inventory);
 				}
 			}
 		}else if(isAddOrderButtonClicked(request.getParameter("Add"))){
@@ -90,7 +88,7 @@ public class CreateOrder extends HttpServlet {
 		Order order = (Order)session.getAttribute("order");
 		if(order == null){
 			Customer customer = (Customer)session.getAttribute("customer");
-			int orderNumber = Integer.valueOf(session.getAttribute("lastOrderNumber").toString());
+			int orderNumber = Integer.valueOf(OrderService.getLastOrderNumber());
 			return new Order(customer, orderNumber+1);
 		}else return order;	
 	}
@@ -120,7 +118,7 @@ public class CreateOrder extends HttpServlet {
 	private boolean isAddOrderButtonClicked(String requestParameter){
 		if(requestParameter == null){
 			return false;
-		}else if(requestParameter.contains("Add Order")){
+		}else if(requestParameter.contains("Finalize Order")){
 			return true;
 		}else return false;
 	}
