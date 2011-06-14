@@ -50,7 +50,7 @@ public class TestOrderDAOImpl {
 			orders.add(o);
 			orderDao.addOrder(o);
 		}
-		Set<Order> dbOrders = orderDao.retrieveOrders(testCustomer);
+		List<Order> dbOrders = orderDao.retrieveOrders(testCustomer);
 		for(Order o:orders){
 			assertTrue(dbOrders.contains(o));
 		}

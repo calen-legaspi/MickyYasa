@@ -40,11 +40,11 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public Set<Order> retrieveOrders(Customer c) {
+	public List<Order> retrieveOrders(Customer c) {
 		String sql = "select * from CustomerOrder where Customer_ID = ?";
 		Object[] params = new Object[]{c.getID()};
 		List<Order> orders = jdbcTemplate.query(sql, params, new OrderRowMapper());
-		Set<Order> customerOrders = new HashSet<Order>();
+		List<Order> customerOrders = new ArrayList<Order>();
 		for(Order o:orders){
 			customerOrders.add(o);
 		}

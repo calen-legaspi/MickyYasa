@@ -23,7 +23,7 @@ public class TestInventoryDAOImpl {
 	
 	@Test
 	public void testAddInventoryItemToInventory(){
-		Product  product = new Product(1, "Ballpen", new BigDecimal("1.00"));
+		Product  product = new Product(2, "Coke", new BigDecimal("1.00"));
 		productDao.createProduct(product);
 		InventoryItem inventoryItem = new InventoryItem(10, product);
 		inventoryDao.addInventoryItemToInventory(inventoryItem);	
@@ -31,7 +31,7 @@ public class TestInventoryDAOImpl {
 	
 	@Test
 	public void testRetrieveInventoryList(){
-		Product  product = new Product(1, "Ballpen", new BigDecimal("1.00"));
+		Product  product = new Product(2, "Coke", new BigDecimal("1.00"));
 		InventoryItem inventoryItem = new InventoryItem(10, product);	
 		List<InventoryItem> inventoryList = inventoryDao.retrieveInventoryItemList();
 		assertTrue(inventoryList.contains(inventoryItem));
@@ -39,7 +39,7 @@ public class TestInventoryDAOImpl {
 
 	@Test
 	public void testUpdateInventory(){
-		Product  product = new Product(1, "Ballpen", new BigDecimal("1.00"));
+		Product  product = new Product(2, "Coke", new BigDecimal("1.00"));
 		InventoryItem inventoryItem = new InventoryItem(5, product);	
 		inventoryDao.updateInventory(inventoryItem);
 		
@@ -51,7 +51,7 @@ public class TestInventoryDAOImpl {
 	
 	@Test
 	public void testDeleteInventoryItemFromInventory(){
-		Product  product = new Product(1, "Ballpen", new BigDecimal("1.00"));
+		Product  product = new Product(2, "Coke", new BigDecimal("1.00"));
 		InventoryItem inventoryItem = new InventoryItem(10, product);
 		inventoryDao.deleteInventoryItemFromInventory(inventoryItem);
 		productDao.deleteProduct(product);

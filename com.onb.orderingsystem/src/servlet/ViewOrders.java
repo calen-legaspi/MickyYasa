@@ -1,7 +1,9 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -47,12 +49,12 @@ public class ViewOrders extends HttpServlet {
 		if(!(checkParameters(request))){
 			int selectedCustomer = Integer.parseInt(request.getParameter("customer"));
 			
-			CustomerService customerService = new CustomerService();
-			Customer customer = customerService.getCustomer(selectedCustomer);
+			Customer customer = CustomerService.getCustomer(selectedCustomer);
 			
 			OrderService orderService = new OrderService();		
-			Set<Order> listOfOrder = (HashSet<Order>) orderService.retrieveOrdersFromDB(customer);
-			
+			List<Order> listOfOrder = (List<Order>) orderService.retrieveOrdersFromDB(customer);
+			Collections.sort(listOfOrder);
+			Collections.reverse(listOfOrder);
 			request.setAttribute("listOfOrder", listOfOrder);
 			request.setAttribute("customer", customer);
 			RequestDispatcher view = request.getRequestDispatcher("viewOrders.jsp");

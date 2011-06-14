@@ -14,7 +14,7 @@ public interface OrderDAO {
 	
 	public Order retrieveOrder(int id);
 	
-	public Set<Order> retrieveOrders(Customer c);
+	public List<Order> retrieveOrders(Customer c);
 	
 	public List<Order> retrieveUnpaidOrders(int id);
 	
