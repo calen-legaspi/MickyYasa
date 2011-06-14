@@ -17,13 +17,13 @@ public class TestCustomerDAOImpl {
 	
 	@Test
 	public void testCreateCustomer(){		
-		Customer customer = new Customer(0);
+		Customer customer = new Customer(2);
 		customer.setFirstName("Eleasah");
 		customer.setLastName("Loresco");
 		customer.setMiddleName("Frialde");
 		customerDao.createCustomer(customer);
 		
-		Customer customer1 = new Customer(1);
+		Customer customer1 = new Customer(3);
 		customer1.setFirstName("Mickey");
 		customer1.setLastName("Espiritu");
 		customer1.setMiddleName("Dianzon");
@@ -60,10 +60,10 @@ public class TestCustomerDAOImpl {
 	
 	@Test
 	public void testDeleteCustomer(){
-		Customer customer = new Customer(0);
+		Customer customer = new Customer(2);
 		customerDao.deleteCustomer(customer);
 		
-		Customer customer1 = new Customer(1);
+		Customer customer1 = new Customer(3);
 		customerDao.deleteCustomer(customer1);
 	}
 }
