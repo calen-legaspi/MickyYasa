@@ -81,7 +81,7 @@ public class OrderDAOImpl implements OrderDAO {
 	public List<Order> retrieveUnpaidOrders(int customerId){
 		String sql = "select * from CustomerOrder where Paid = 0 and Customer_ID = ?";
 		Object[] params = new Object[]{customerId};
-		List<Order> unpaidOrders = (ArrayList<Order>) jdbcTemplate.query(sql, params, new OrderRowMapper());
+		List<Order> unpaidOrders = (List<Order>) jdbcTemplate.query(sql, params, new OrderRowMapper());
 		return unpaidOrders;
 	}
 }
