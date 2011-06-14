@@ -50,18 +50,20 @@ public class UnpaidOrders extends HttpServlet {
 			order.pay();
 			OrderService.updateStatusOfOrderInDB(order);
 		}
+		HttpSession session = request.getSession();
+		Customer customer;
 		if(!(checkParameters(request))){
-			HttpSession session = request.getSession();
-			Customer customer = (Customer) session.getAttribute("customer");
-			
-			OrderService orderService = new OrderService();		
-			List<Order> listOfOrder = orderService.retrieveUnpaidOrders(customer);
-			
-			request.setAttribute("listOfOrder", listOfOrder);
-			session.setAttribute("customer", customer);
-			RequestDispatcher view = request.getRequestDispatcher("unpaidOrders.jsp");
-			view.forward(request, response);
+			customer = (Customer) session.getAttribute("customer");
+		}else{
+			customer = CustomerService.getCustomer(Integer.parseInt(request.getParameter("customer")));
 		}
+		OrderService orderService = new OrderService();		
+		List<Order> listOfOrder = orderService.retrieveUnpaidOrders(customer);
+		
+		request.setAttribute("listOfOrder", listOfOrder);
+		session.setAttribute("customer", customer);
+		RequestDispatcher view = request.getRequestDispatcher("unpaidOrders.jsp");
+		view.forward(request, response);	
 	}
 	
 	private boolean isPayButtonClicked(String requestParameter){
@@ -71,7 +73,7 @@ public class UnpaidOrders extends HttpServlet {
 	}
 	
 	private boolean checkParameters(HttpServletRequest request){
-		if(request.getAttribute("customer") == null) {
+		if(request.getParameter("customer") == null) {
 			return false;
 		}else return true;		
 	}

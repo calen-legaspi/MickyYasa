@@ -55,7 +55,7 @@
 	 		</center>
 
 		</div>
-    	<div id="side" class="fl">
+    	<div id="side" class="sidefl">
       		<div class="sinner">
 	        <h2>Categories</h2>
 	        <center>

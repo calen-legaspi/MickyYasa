@@ -27,7 +27,7 @@
           <a href="http://www.templatesold.com/" target="_blank">Website Templates</a> by <a href="http://www.free-css-templates.com/" target="_blank">Free CSS Templates</a></p>
       </div>
     </div>
-    <div id="side" class="fl">
+    <div id="side" class="sidefl">
       <div class="sinner">
      	<h2>Categories</h2>
       	<center>

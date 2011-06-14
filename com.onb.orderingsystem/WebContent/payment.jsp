@@ -49,7 +49,7 @@
 			
 			</form>
 		</div>
-    	<div id="side" class="fl">
+    	<div id="side" class="sidefl">
       		<div class="sinner">
 	        <h2>Categories</h2>
 	        <center>
@@ -74,7 +74,7 @@
       		</div>
    		 </div>
   		
-  		 <div id="sider" class="fl">
+  		 <div id="sider" class="sidefl">
   		 	<div class="sdinner"></div>
   		 </div>
   		 
