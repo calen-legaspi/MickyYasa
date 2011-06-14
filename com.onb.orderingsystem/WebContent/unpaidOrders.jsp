@@ -11,7 +11,7 @@
 	function payOrder(index){
 		var form = document.createElement("form");
 		form.setAttribute("method", "post");
-		form.setAttribute("action","UpdateOrderStatus");
+		form.setAttribute("action","UnpaidOrders");
 		var idField = 	document.createElement("input");
 		idField.setAttribute("type", "hidden");
 		idField.setAttribute("name", "orderIndex");
@@ -36,14 +36,14 @@
      		
      		<center>
 			
-			<form method = "POST" action = "UpdateOrderStatus" enctype="application/x-www-form-urlencoded">
+			<form method = "POST" action = "UnpaidOrders" enctype="application/x-www-form-urlencoded">
 			
 			<%		
 			List<Order> orderList = new ArrayList<Order>();
 			if(request.getAttribute("listOfOrder")!=null){
 				orderList = (List<Order>) request.getAttribute("listOfOrder");
 			}
-			Customer customer  = (Customer)request.getAttribute("customer");
+			Customer customer  = (Customer)session.getAttribute("customer");
 	   		%>
 			<h2>Orders of <%= customer.getFirstName() + " " + customer.getLastName() %></h2>
 			
@@ -55,7 +55,9 @@
 					<td align = "center">Action</td>
 				</tr>
 		
-				<% for(Order order : orderList){ %>
+				<% for(Order order : orderList){ 
+					if(!order.hasPaid()){
+				%>
 					<tr>
 						<td align = "center"><%= order.getOrderNumber() %></td>
 						<td align = "center"><%= order.getDateofOrderCreation().getTime() %></td>
@@ -64,7 +66,8 @@
 							<input type="button" value="Pay" name = "Pay" onclick = "payOrder(<%= order.getOrderNumber() %>)" />
 						</td>
 					</tr>
-				<% } %>
+				<% }
+				} %>
 			</table>
 			</form>	 
 	 		</center>

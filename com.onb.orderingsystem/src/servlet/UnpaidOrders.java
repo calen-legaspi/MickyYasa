@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.CustomerService;
 import controller.OrderService;
@@ -43,20 +44,30 @@ public class UnpaidOrders extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(isPayButtonClicked(request.getParameter("orderIndex"))){
+			int selectedOrderNumber = Integer.parseInt(request.getParameter("orderIndex"));
+			Order order = OrderService.retrieveOrderFromDB(selectedOrderNumber);
+			order.pay();
+			OrderService.updateStatusOfOrderInDB(order);
+		}
 		if(!(checkParameters(request))){
-			int selectedCustomer = Integer.parseInt(request.getParameter("customer"));
-			
-			CustomerService customerService = new CustomerService();
-			Customer customer = customerService.getCustomer(selectedCustomer);
+			HttpSession session = request.getSession();
+			Customer customer = (Customer) session.getAttribute("customer");
 			
 			OrderService orderService = new OrderService();		
 			List<Order> listOfOrder = orderService.retrieveUnpaidOrders(customer);
 			
 			request.setAttribute("listOfOrder", listOfOrder);
-			request.setAttribute("customer", customer);
+			session.setAttribute("customer", customer);
 			RequestDispatcher view = request.getRequestDispatcher("unpaidOrders.jsp");
 			view.forward(request, response);
 		}
+	}
+	
+	private boolean isPayButtonClicked(String requestParameter){
+		if(requestParameter == null){
+			return false;
+		}else return true;
 	}
 	
 	private boolean checkParameters(HttpServletRequest request){
