@@ -45,7 +45,7 @@ public class OrderService {
 		return orderDao.retrieveOrder(orderNumber);
 	}
 	
-	public Set<Order> retrieveOrdersFromDB(Customer c){
+	public List<Order> retrieveOrdersFromDB(Customer c){
 		return orderDao.retrieveOrders(c);
 	}
 	
@@ -57,7 +57,7 @@ public class OrderService {
 
 	public static Customer addOrdersFromDB(Customer c) {
 		Customer newCustomer = new Customer(c.getID());
-		Set<Order> orders = orderDao.retrieveOrders(c);
+		List<Order> orders = orderDao.retrieveOrders(c);
 		for(Order o: orders){
 			newCustomer.addOrder(o);
 		}

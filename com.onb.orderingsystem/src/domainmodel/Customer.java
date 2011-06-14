@@ -13,7 +13,7 @@ public class Customer implements Serializable{
 	private String middleName;
 	private BigDecimal totalPaidOrders;
 	private BigDecimal totalPriceOfOrders;	
-	private Set<Order> orders;
+	private List<Order> orders;
 	
 	/**
 	 * Creates a new instance of Object Customer with identifier id
@@ -23,7 +23,7 @@ public class Customer implements Serializable{
 		this.id = id;
 		totalPaidOrders = new BigDecimal(0);
 		totalPriceOfOrders = new BigDecimal(0);
-		setOrders(new HashSet<Order>());
+		setOrders(new ArrayList<Order>());
 	}
 	
 
@@ -158,11 +158,11 @@ public class Customer implements Serializable{
 		return true;
 	}
 
-	public void setOrders(Set<Order> orders) {
+	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
 
-	public Set<Order> getOrders() {
+	public List<Order> getOrders() {
 		return orders;
 	}
 

@@ -38,11 +38,13 @@
 			<form method = "POST" action = "OrderDetails" enctype="application/x-www-form-urlencoded">
 			
 			<%
-			Set<Order> orderList = new HashSet<Order>();
+			List<Order> orderList = new ArrayList<Order>();
 			if(request.getAttribute("listOfOrder")!=null){
-			orderList = (HashSet<Order>) request.getAttribute("listOfOrder");
+			orderList = (ArrayList<Order>) request.getAttribute("listOfOrder");
 			}
 			Customer customer  = (Customer)request.getAttribute("customer");
+			
+			double paid = 0, unpaid = 0; 
 	   		%>
 	   	
 	   		<h2>Orders of <%= customer.getFirstName() + " " + customer.getLastName() %></h2>
@@ -52,10 +54,14 @@
 					<td align = "center">Order Number</td>
 					<td align = "center">Order Date</td>
 					<td align = "center">Total Cost</td>
+					<td align = "center">Status</td>
 					<td align = "center">Action</td>
 				</tr>
 		
-				<% for(Order order : orderList){ int orderNumber = order.getOrderNumber(); %>
+				<% for(Order order : orderList){ 
+					int orderNumber = order.getOrderNumber(); 
+					double totalCost = order.computeTotalCost(customer.getCreditLimit().intValue()).doubleValue();
+				%>
 				
 				<tr>
 					<td align = "center">
@@ -65,15 +71,27 @@
 						<%= order.getDateofOrderCreation().getTime() %>
 					</td>
 					<td align = "center">
-						<%= order.computeTotalCost(customer.getCreditLimit().intValue()).doubleValue()%>
+						<%= totalCost %>
 					</td>
 					<td align = "center">
-						<input type = "button" name = "View" value = "View Order Details" onclick = "viewOrderDetails(<%= order.getOrderNumber() %>)" />
+						<% if(!order.hasPaid()) { unpaid = unpaid + totalCost; %> Unpaid
+						<% } else if (order.hasPaid()){ paid = paid + totalCost; %> Paid
+						<% } %>
+					</td>
+					<td align = "center">
+						<input type = "button" name = "View" value = "View" onclick = "viewOrderDetails(<%= order.getOrderNumber() %>)" />
 					</td>
 						
 				</tr>
 				<% } %>
 			</table>
+			
+			<br />
+			<br />
+			Total Paid Orders: <%= paid %>
+			<br />
+			Total Unpaid Orders: <%= unpaid %>
+			
 			</form>	 
 			<center>
 
