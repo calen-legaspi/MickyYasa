@@ -25,13 +25,18 @@ public class OrderService {
 	}
 	
 	public static void addOrderToDB(Order o) {
-		orderDao.addOrder(o);
-		List<OrderItem> items = o.getItems();
-		Inventory inventory = new Inventory(InventoryService.getAllAvailableProductsInDB());
-		for(OrderItem i: items){
-			Product product = ProductService.getProduct(i.getItemSKUNumber());
-			InventoryItem inventoryitem = InventoryService.getInventoryItem(inventory,product);
-			InventoryService.deductFromInventory(inventory, inventoryitem, i.getQuantity());
+		Customer customer = CustomerService.getCustomer(o.getCustomerID());
+		customer.setOrders(OrderService.retrieveUnpaidOrders(customer));
+		customer.addOrder(o);
+		if(customer.getOrders().contains(o)){
+			orderDao.addOrder(o);
+			List<OrderItem> items = o.getItems();
+			Inventory inventory = new Inventory(InventoryService.getAllAvailableProductsInDB());
+			for(OrderItem i: items){
+				Product product = ProductService.getProduct(i.getItemSKUNumber());
+				InventoryItem inventoryitem = InventoryService.getInventoryItem(inventory,product);
+				InventoryService.deductFromInventory(inventory, inventoryitem, i.getQuantity());
+			}
 		}
 	}
 

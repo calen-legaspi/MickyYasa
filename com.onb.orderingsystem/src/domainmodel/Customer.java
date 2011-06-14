@@ -112,26 +112,48 @@ public class Customer implements Serializable{
 		return totalPriceOfOrders.subtract(totalPaidOrders);
 	}
 
+	/**
+	 * 
+	 * @return the last name
+	 */
 	public String getLastName() {
 		return lastName;
 	}
 
+	/**
+	 * Assigns the customer's last name
+	 * @param lastName - the customer's last name
+	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
+	
+	/**
+	 * @return the first name
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
+	/**
+	 * Assigns the customer's first name
+	 * @param firstName - the customer's first name
+	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
+	/**
+	 * @return the middle name
+	 */
 	public String getMiddleName() {
 		return middleName;
 	}
 
+	/**
+	 * Assigns the customer's middle name
+	 * @param middleName - the customer's middle name
+	 */
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
 	}
@@ -158,6 +180,10 @@ public class Customer implements Serializable{
 		return true;
 	}
 
+	/**
+	 * Sets the Customer's list of orders. Note: this should only be called immediately after you create a new Customer and the customer and list of orders are retrieved from a database. 
+	 * @param orders - the list of orders
+	 */
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
