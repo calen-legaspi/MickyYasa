@@ -40,7 +40,6 @@ public class OrderDetails extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int selectedOrderNumber = Integer.parseInt(request.getParameter("orderIndex"));
-		System.out.println("hello world");
 		OrderService orderService = new OrderService();
 		
 		Order order = orderService.retrieveOrderFromDB(selectedOrderNumber);

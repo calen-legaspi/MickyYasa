@@ -7,12 +7,12 @@ import java.util.*;
 
 public class Customer implements Serializable{
 	
-	private int id;
+	private final int id;
 	private String lastName;
 	private String firstName;
 	private String middleName;
-	private BigDecimal totalPaidOrders;
-	private BigDecimal totalPriceOfOrders;	
+	private BigDecimal totalPaidOrders = BigDecimal.ZERO;
+	private BigDecimal totalPriceOfOrders = BigDecimal.ZERO;	
 	private List<Order> orders;
 	
 	/**
@@ -21,8 +21,6 @@ public class Customer implements Serializable{
 	 */
 	public Customer(int id){
 		this.id = id;
-		totalPaidOrders = new BigDecimal(0);
-		totalPriceOfOrders = new BigDecimal(0);
 		setOrders(new ArrayList<Order>());
 	}
 	

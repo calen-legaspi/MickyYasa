@@ -13,8 +13,8 @@ import junit.framework.Assert;
 
 public class TestCustomer {
 	
-	Customer testCustomer;
-	Order tempOrder;
+	private Customer testCustomer;
+	private Order tempOrder;
 	
 	@Before
 	public void setUp(){
@@ -29,13 +29,13 @@ public class TestCustomer {
 	public void breakUp(){
 	}
 	
-	//@Test
+	@Test
 	public void testAddingOrders(){
 		testCustomer.addOrder(tempOrder);
 		Assert.assertEquals(1, testCustomer.getUnpaidOrders().size());
 	}
 
-	//@Test
+	@Test
 	public void testAddingTheSameOrderMultipleTimes(){;
 		testCustomer.addOrder(tempOrder);
 		Assert.assertEquals(1, testCustomer.getUnpaidOrders().size());
@@ -44,7 +44,7 @@ public class TestCustomer {
 		Assert.assertEquals(1, testCustomer.getUnpaidOrders().size());
 	}
 	
-	//@Test
+	@Test
 	public void testAddingAnOrderWithHigherTotalCostThanCreditLimit(){
 		tempOrder.addItem(new OrderItem(1000,new Product(222,"Explosives", new BigDecimal("7000.50"))));
 		tempOrder.consolidateItems();
@@ -52,7 +52,7 @@ public class TestCustomer {
 		Assert.assertFalse(testCustomer.getUnpaidOrders().contains(tempOrder));
 	}
 	
-	//@Test
+	@Test
 	public void customerPaymentTransaction(){
 		testCustomer.addOrder(tempOrder);
 		Assert.assertEquals(1, testCustomer.getUnpaidOrders().size());
@@ -62,7 +62,7 @@ public class TestCustomer {
 		Assert.assertFalse(testCustomer.getUnpaidOrders().contains(tempOrder));
 	}
 	
-	//@Test
+	@Test
 	public void customerPaymentTransactionWhileIncreasingCreditLimit(){
 		for(int i = 0; i< 25; i++){
 			tempOrder = new Order(testCustomer);
