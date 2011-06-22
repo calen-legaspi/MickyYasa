@@ -15,6 +15,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.onb.daos.*;
 import com.onb.domainmodel.*;
+import com.onb.impl.CustomerService;
+import com.onb.impl.InventoryService;
+import com.onb.impl.OrderService;
+import com.onb.impl.ProductService;
 import com.onb.services.*;
 
 import java.util.*;

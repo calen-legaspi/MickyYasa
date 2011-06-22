@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.onb.domainmodel.Customer;
-import com.onb.services.CustomerService;
+import com.onb.impl.CustomerService;
 
 
 
