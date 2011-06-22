@@ -13,8 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import com.onb.domainmodel.Customer;
 import com.onb.domainmodel.Order;
-import com.onb.impl.CustomerService;
-import com.onb.impl.OrderService;
+import com.onb.impl.CustomerServiceImpl;
+import com.onb.impl.OrderServiceImpl;
 
 
 /**
@@ -47,18 +47,18 @@ public class UnpaidOrders extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(isPayButtonClicked(request.getParameter("orderIndex"))){
 			int selectedOrderNumber = Integer.parseInt(request.getParameter("orderIndex"));
-			Order order = OrderService.retrieveOrderFromDB(selectedOrderNumber);
+			Order order = OrderServiceImpl.retrieveOrderFromDB(selectedOrderNumber);
 			order.pay();
-			OrderService.updateStatusOfOrderInDB(order);
+			OrderServiceImpl.updateStatusOfOrderInDB(order);
 		}
 		HttpSession session = request.getSession();
 		Customer customer;
 		if(!(checkParameters(request))){
 			customer = (Customer) session.getAttribute("customer");
 		}else{
-			customer = CustomerService.getCustomer(Integer.parseInt(request.getParameter("customer")));
+			customer = CustomerServiceImpl.getCustomer(Integer.parseInt(request.getParameter("customer")));
 		}
-		OrderService orderService = new OrderService();		
+		OrderServiceImpl orderService = new OrderServiceImpl();		
 		List<Order> listOfOrder = orderService.retrieveUnpaidOrders(customer);
 		
 		request.setAttribute("listOfOrder", listOfOrder);

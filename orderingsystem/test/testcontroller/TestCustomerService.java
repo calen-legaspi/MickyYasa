@@ -7,12 +7,12 @@ import java.util.List;
 import org.junit.Test;
 
 import com.onb.domainmodel.Customer;
-import com.onb.impl.CustomerService;
+import com.onb.impl.CustomerServiceImpl;
 
 
 
 public class TestCustomerService{
-	CustomerService customerService = new CustomerService();
+	CustomerServiceImpl customerService = new CustomerServiceImpl();
 	
 	@Test
 	public void testGetCustomerList(){

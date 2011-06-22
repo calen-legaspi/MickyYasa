@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.onb.domainmodel.Customer;
 import com.onb.domainmodel.Order;
-import com.onb.impl.CustomerService;
-import com.onb.impl.OrderService;
+import com.onb.impl.CustomerServiceImpl;
+import com.onb.impl.OrderServiceImpl;
 
 
 /**
@@ -39,7 +39,7 @@ public class OrderHistory extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(!(checkParameters(request))){
-			CustomerService customerService = new CustomerService();
+			CustomerServiceImpl customerService = new CustomerServiceImpl();
 			List<Customer> listOfCustomer = customerService.getCustomerList();
 
 			request.setAttribute("listOfCustomer", listOfCustomer);		

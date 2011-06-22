@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.onb.domainmodel.Customer;
 import com.onb.domainmodel.Order;
-import com.onb.impl.CustomerService;
-import com.onb.impl.OrderService;
+import com.onb.impl.CustomerServiceImpl;
+import com.onb.impl.OrderServiceImpl;
 
 
 /**
@@ -50,9 +50,9 @@ public class ViewOrders extends HttpServlet {
 		if(!(checkParameters(request))){
 			int selectedCustomer = Integer.parseInt(request.getParameter("customer"));
 			
-			Customer customer = CustomerService.getCustomer(selectedCustomer);
+			Customer customer = CustomerServiceImpl.getCustomer(selectedCustomer);
 			
-			OrderService orderService = new OrderService();		
+			OrderServiceImpl orderService = new OrderServiceImpl();		
 			List<Order> listOfOrder = (List<Order>) orderService.retrieveOrdersFromDB(customer);
 			Collections.sort(listOfOrder);
 			Collections.reverse(listOfOrder);
