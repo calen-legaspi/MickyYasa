@@ -12,7 +12,7 @@ import domainmodel.*;
 
 public class OrderService {
 	static ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
-	static OrderDAO orderDao = (OrderDAO)ctx.getBean("OrderDao");
+	static OrderDAO orderDAO = (OrderDAO)ctx.getBean("orderDAO");
 	
 
 	public OrderService(){
@@ -21,7 +21,7 @@ public class OrderService {
 
 	
 	public static int getLastOrderNumber(){
-		return orderDao.getLastOrderNumber();
+		return orderDAO.getLastOrderNumber();
 	}
 	
 	public static void addOrderToDB(Order o) {
@@ -29,7 +29,7 @@ public class OrderService {
 		customer.setOrders(OrderService.retrieveUnpaidOrders(customer));
 		customer.addOrder(o);
 		if(customer.getOrders().contains(o)){
-			orderDao.addOrder(o);
+			orderDAO.addOrder(o);
 			List<OrderItem> items = o.getItems();
 			Inventory inventory = new Inventory(InventoryService.getAllAvailableProductsInDB());
 			for(OrderItem i: items){
@@ -41,15 +41,15 @@ public class OrderService {
 	}
 
 	public static void updateStatusOfOrderInDB(Order o) {
-		orderDao.payOrder(o);
+		orderDAO.payOrder(o);
 	}
 	
 	public static Order retrieveOrderFromDB(int orderNumber){
-		return orderDao.retrieveOrder(orderNumber);
+		return orderDAO.retrieveOrder(orderNumber);
 	}
 	
 	public List<Order> retrieveOrdersFromDB(Customer c){
-		return orderDao.retrieveOrders(c);
+		return orderDAO.retrieveOrders(c);
 	}
 	
 	public static void deleteOrderItem(Order order, int itemIndex){
@@ -60,7 +60,7 @@ public class OrderService {
 
 	public static Customer addOrdersFromDB(Customer c) {
 		Customer newCustomer = new Customer(c.getID());
-		List<Order> orders = orderDao.retrieveOrders(c);
+		List<Order> orders = orderDAO.retrieveOrders(c);
 		for(Order o: orders){
 			newCustomer.addOrder(o);
 		}
@@ -68,7 +68,7 @@ public class OrderService {
 	}
 	
 	public static List<Order> retrieveUnpaidOrders(Customer customer){
-		List<Order> orders = orderDao.retrieveUnpaidOrders(customer.getID());
+		List<Order> orders = orderDAO.retrieveUnpaidOrders(customer.getID());
 		return orders;
 	}
 }

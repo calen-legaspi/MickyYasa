@@ -15,8 +15,8 @@ public class OrderRowMapper implements RowMapper {
 	public Object mapRow(ResultSet arg0, int arg1) throws SQLException {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
 		Order o = new Order(arg0.getInt("Order_Number"),arg0.getInt("Customer_ID"), arg0.getDate("Date"),  arg0.getBoolean("Paid"));
-		OrderItemDAO orderitemDAO = (OrderItemDAO)ctx.getBean("OrderItemDao");
-		o.setOrderItems(orderitemDAO.getOrderItems(o));
+		OrderItemDAO orderItemDAO = (OrderItemDAO)ctx.getBean("orderItemDAO");
+		o.setOrderItems(orderItemDAO.getOrderItems(o));
 		return o;
 	}
 

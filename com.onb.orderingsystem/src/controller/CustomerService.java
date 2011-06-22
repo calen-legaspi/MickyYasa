@@ -10,14 +10,14 @@ import domainmodel.Customer;
 
 public class CustomerService {
 	static ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
-	static CustomerDAO customerDao = (CustomerDAO)ctx.getBean("CustomerDao");
+	static CustomerDAO customerDAO = (CustomerDAO)ctx.getBean("customerDAO");
 
 	/**
 	 * 
 	 * @return the entire list of customer
 	 */
 	public static List<Customer> getCustomerList(){
-		return customerDao.retrieveCustomerList();
+		return customerDAO.retrieveCustomerList();
 	}
 	
 	/**
@@ -25,7 +25,7 @@ public class CustomerService {
 	 * @return the list of customers with Unpaid orders
 	 */
 	public static List<Customer> getCustomerWithUnpaidOrders(){
-		return customerDao.retrieveUnpaidCustomerList();
+		return customerDAO.retrieveUnpaidCustomerList();
 	}
 	
 	/**
@@ -34,6 +34,6 @@ public class CustomerService {
 	 * @return a specific customer
 	 */
 	public static Customer getCustomer(int id){
-		return customerDao.retrieveCustomer(id);
+		return customerDAO.retrieveCustomer(id);
 	}
 }

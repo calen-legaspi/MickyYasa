@@ -16,8 +16,8 @@ public class CustomerRowMapper implements RowMapper {
 		customer.setMiddleName(customerset.getString("Middle_Name"));
 		customer.setLastName(customerset.getString("Last_Name"));
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
-		OrderDAO orderDao = (OrderDAO)ctx.getBean("OrderDao");
-		customer.setOrders(orderDao.retrieveOrders(customer));
+		OrderDAO orderDAO = (OrderDAO)ctx.getBean("orderDAO");
+		customer.setOrders(orderDAO.retrieveOrders(customer));
 		return customer;
 	}
 }

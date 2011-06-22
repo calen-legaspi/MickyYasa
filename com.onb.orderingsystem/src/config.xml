@@ -17,24 +17,23 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	<bean id = "CustomerDao" class = "dao.CustomerDAOImpl">
+	<bean name="abstractDAO" abstract="true">
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 	
-	<bean id = "ProductDao" class = "dao.ProductDAOImpl">
-		<property name = "jdbcTemplate" ref="jdbcTemplate" />
+	<bean id = "customerDAO" parent="abstractDAO" class = "daoImpl.CustomerDAOImpl">
 	</bean>
 	
-	<bean id = "OrderDao" class = "dao.OrderDAOImpl">
-		<property name = "jdbcTemplate" ref="jdbcTemplate" />
+	<bean id = "productDAO" parent="abstractDAO" class = "daoImpl.ProductDAOImpl">
 	</bean>
 	
-	<bean id = "InventoryDao" class = "dao.InventoryDAOImpl">
-		<property name = "jdbcTemplate" ref="jdbcTemplate" />
+	<bean id = "orderDAO" parent="abstractDAO" class = "daoImpl.OrderDAOImpl">
 	</bean>
 	
-	<bean id = "OrderItemDao" class = "dao.OrderItemDAOImpl">
-		<property name = "jdbcTemplate" ref="jdbcTemplate" />
+	<bean id = "inventoryDAO" parent="abstractDAO" class = "daoImpl.InventoryDAOImpl">
+	</bean>
+	
+	<bean id = "orderItemDAO" parent="abstractDAO" class = "daoImpl.OrderItemDAOImpl">
 	</bean>
 
 </beans>
