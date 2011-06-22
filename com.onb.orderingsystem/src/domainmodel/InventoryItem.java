@@ -8,17 +8,19 @@ public class InventoryItem implements Serializable{
 	private Product product;
 	
 	public InventoryItem(int initialQuantity, Product product){
-		if(initialQuantity <0)
-			throw new IllegalArgumentException("Initial Quantity parameter should be more than zero. Found: "+initialQuantity);
-		else if (product==null)
-			throw new NullPointerException("Product parameter is null");		
+		if(initialQuantity < 0){
+			throw new IllegalArgumentException("Initial Quantity parameter should be more than zero. Found: " + initialQuantity);
+		}else if (product == null){
+			throw new NullPointerException("Product parameter is null");
+		}
 		this.quantity = initialQuantity;
 		this.product = product;
 	}
 	
 	public void deduct(int amount){
-		if(quantity< amount)
+		if(quantity< amount){
 			throw new ArithmeticException("Trying to subtract a larger number from the quantity instance variable");
+		}
 		quantity -= amount;
 	}
 	

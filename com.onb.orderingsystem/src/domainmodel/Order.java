@@ -9,36 +9,28 @@ public class Order implements Comparable,Serializable{
 	private int orderNumber;
 
 	public static int increment = 0;
-	private Calendar date;
-	private boolean paid;
+	private Calendar date = new GregorianCalendar();
+	private boolean paid = false;
 	private int payerID;
-	private List<OrderItem> items;
+	private List<OrderItem> items = new ArrayList<OrderItem>();
 	
 	public Order(Customer payerID){
-		orderNumber = 1000000+increment;
+		orderNumber = 0 + increment;
 		increment++;
 		this.payerID = payerID.getID();
-		date = new GregorianCalendar();
 		date.clear(Calendar.MILLISECOND);		//The milliseconds variable makes one unit test fail
-		items = new ArrayList<OrderItem>();
-		paid = false;
 	}
 	
 	public Order(Customer payerID, int orderNumber){
 		this.orderNumber = orderNumber;
 		this.payerID = payerID.getID();
-		date = new GregorianCalendar();
 		date.clear(Calendar.MILLISECOND);		//The milliseconds variable makes one unit test fail
-		items = new ArrayList<OrderItem>();
-		paid = false;
 	}
 	
 	public Order(int orderNumber, int payerID, Date date, boolean paid){
 		this.orderNumber = orderNumber;
-		this.date = new GregorianCalendar();
 		this.payerID = payerID;
 		this.date.setTime(date);
-		items = new ArrayList<OrderItem>();
 		this.paid = paid;
 	}
 	
@@ -56,9 +48,11 @@ public class Order implements Comparable,Serializable{
 	public void consolidateItems(){
 		ArrayList<OrderItem> newOrderList = new ArrayList<OrderItem>();
 		for(OrderItem i: items){
-			if(newOrderList.contains(i))
+			if(newOrderList.contains(i)){
 				updateOrderItem(newOrderList.indexOf(i), i.getQuantity());
-			else newOrderList.add(i);
+			}else {
+				newOrderList.add(i);
+			}
 		}
 		items = newOrderList;
 	}
@@ -68,12 +62,20 @@ public class Order implements Comparable,Serializable{
 	}
 	
 	public BigDecimal computeTotalCost(int creditLimit){
-		BigDecimal totalCost = new BigDecimal(0);
-		for(OrderItem o: items)
+		BigDecimal totalCost = BigDecimal.ZERO;	
+				
+		for(OrderItem o: items){
 			totalCost = totalCost.add(o.getCost());
-		if(creditLimit == 150000)
-			totalCost = totalCost.subtract(totalCost.multiply(new BigDecimal("0.10")));
+		}
+		if(creditLimit == 150000){
+			totalCost = totalCost.subtract(getDiscount(totalCost));
+		}
 		return totalCost;
+	}
+	
+	public BigDecimal getDiscount(BigDecimal totalCost){
+		BigDecimal discount = new BigDecimal("0.10");
+		return totalCost.multiply(discount);
 	}
 
 	

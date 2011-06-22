@@ -70,13 +70,15 @@ public class Customer implements Serializable{
 	 * @return the credit limit
 	 */
 	public BigDecimal getCreditLimit(){
-		if (totalPaidOrders.compareTo(new BigDecimal(100000)) ==-1)
+		if (totalPaidOrders.compareTo(new BigDecimal(100000)) ==-1){
 			return new BigDecimal(10000);
-		else if (totalPaidOrders.compareTo(new BigDecimal(500000)) ==-1)
+		}else if (totalPaidOrders.compareTo(new BigDecimal(500000)) ==-1){
 			return new BigDecimal(30000);
-		else if (totalPaidOrders.compareTo(new BigDecimal(1000000)) ==-1)
+		}else if (totalPaidOrders.compareTo(new BigDecimal(1000000)) ==-1){
 			return new BigDecimal(75000);
-		else return new BigDecimal(150000);
+		}else{
+			return new BigDecimal(150000);
+		}
 	}
 	
 	/**
@@ -95,8 +97,9 @@ public class Customer implements Serializable{
 	public List<Order> getUnpaidOrders(){
 		List<Order> unpaidOrders = new ArrayList<Order>();
 		for(Order o:getOrders()){
-			if(!o.hasPaid())
+			if(!o.hasPaid()){
 				unpaidOrders.add(o);
+			}
 		}
 		Collections.sort(unpaidOrders);
 		return unpaidOrders;

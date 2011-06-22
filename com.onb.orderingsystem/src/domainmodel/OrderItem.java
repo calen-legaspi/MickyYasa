@@ -9,10 +9,11 @@ public class OrderItem implements Serializable{
 	private Product product;
 	
 	public OrderItem(int quantity, Product product){
-		if(quantity <= 0)
+		if(quantity <= 0){
 			throw new IllegalArgumentException("Quantity parameter is invalid. Quantity parameter should be greater than 0");
-		else if (product == null)
+		}else if (product == null){
 			throw new NullPointerException("Product parameter is null");
+		}
 		this.quantity = quantity;
 		this.product = product;
 	}
@@ -64,8 +65,5 @@ public class OrderItem implements Serializable{
 
 	public int getItemSKUNumber(){
 		return product.getSKUNumber();
-	}
-	
-	
-	
+	}	
 }

@@ -5,22 +5,24 @@ import java.util.*;
 
 public class Inventory implements Serializable{
 	
-	private List<InventoryItem> items;
+	private List<InventoryItem> items = new ArrayList<InventoryItem>();
 	
 	public Inventory(){
-		items = new ArrayList<InventoryItem>();
+	
 	}
 	
 	public Inventory(List<InventoryItem> items){
-		if(items.size() == 0)
+		if(items.size() == 0){
 			throw new IllegalArgumentException("Items parameter has an empty arraylist");
+		}
 		this.items = items;
 	}
 	
 	public InventoryItem getItem(Product product){
 		for(InventoryItem i:items){
-			if(i.getProduct().equals(product))
+			if(i.getProduct().equals(product)){
 				return i;
+			}
 		}
 		return null;
 	}
@@ -39,8 +41,9 @@ public class Inventory implements Serializable{
 	public List<InventoryItem> getAllItemsInStock(){
 		ArrayList<InventoryItem> inventory = new ArrayList<InventoryItem>();
 		for(InventoryItem i:items){
-			if(i.getQuantity()>0)
+			if(i.getQuantity()>0){
 				inventory.add(i);
+			}
 		}
 		return inventory;
 	}

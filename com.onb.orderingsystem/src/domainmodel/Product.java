@@ -10,14 +10,15 @@ public class Product implements Serializable {
 	private BigDecimal price;
 	
 	public Product(int skuNumber, String name, BigDecimal price){
-		if(skuNumber <0)
+		if(skuNumber < 0){
 			throw new IllegalArgumentException("skuNumber is less than 0. skuNumber should be greater or equal to than 0.");
-		else if (name== null)
+		}else if (name == null){
 			throw new NullPointerException("name has no value");
-		else if (name.isEmpty())
+		}else if (name.isEmpty()){
 			throw new IllegalArgumentException("name string is empty");
-		else if (price == null)
+		}else if (price == null){
 			throw new NullPointerException("price parameter is null");
+		}
 		this.skuNumber = skuNumber;
 		this.name = name;
 		this.price = price;
@@ -55,8 +56,5 @@ public class Product implements Serializable {
 		if (skuNumber != other.skuNumber)
 			return false;
 		return true;
-	}
-
-	
-	
+	}	
 }
