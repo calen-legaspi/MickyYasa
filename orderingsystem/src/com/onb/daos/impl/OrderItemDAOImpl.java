@@ -2,8 +2,6 @@ package com.onb.daos.impl;
 
 import java.util.List;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import com.onb.daos.OrderItemDAO;
 import com.onb.domainmodel.*;
 import com.onb.resultretrieval.*;

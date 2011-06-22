@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.onb.domainmodel.Customer;
 import com.onb.domainmodel.Order;
-import com.onb.impl.CustomerServiceImpl;
-import com.onb.impl.OrderServiceImpl;
+import com.onb.services.impl.CustomerServiceImpl;
+import com.onb.services.impl.OrderServiceImpl;
 
 
 /**

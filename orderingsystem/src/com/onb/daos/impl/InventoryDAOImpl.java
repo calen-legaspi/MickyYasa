@@ -2,12 +2,8 @@ package com.onb.daos.impl;
 
 import java.util.List;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import com.onb.daos.InventoryDAO;
 import com.onb.domainmodel.InventoryItem;
-import com.onb.domainmodel.Product;
-import com.onb.resultretrieval.CustomerRowMapper;
 import com.onb.resultretrieval.InventoryRowMapper;
 
 

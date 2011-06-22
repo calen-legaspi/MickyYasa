@@ -13,8 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import com.onb.domainmodel.Customer;
 import com.onb.domainmodel.Order;
-import com.onb.impl.CustomerServiceImpl;
-import com.onb.impl.OrderServiceImpl;
+import com.onb.services.impl.CustomerServiceImpl;
+import com.onb.services.impl.OrderServiceImpl;
 
 
 /**
@@ -23,7 +23,9 @@ import com.onb.impl.OrderServiceImpl;
 @WebServlet("/UnpaidOrders")
 public class UnpaidOrders extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	OrderServiceImpl orderServiceImpl = new OrderServiceImpl();
+	CustomerServiceImpl customerServiceImpl = new CustomerServiceImpl();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -47,16 +49,16 @@ public class UnpaidOrders extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(isPayButtonClicked(request.getParameter("orderIndex"))){
 			int selectedOrderNumber = Integer.parseInt(request.getParameter("orderIndex"));
-			Order order = OrderServiceImpl.retrieveOrderFromDB(selectedOrderNumber);
+			Order order = orderServiceImpl.retrieveOrderFromDB(selectedOrderNumber);
 			order.pay();
-			OrderServiceImpl.updateStatusOfOrderInDB(order);
+			orderServiceImpl.updateStatusOfOrderInDB(order);
 		}
 		HttpSession session = request.getSession();
 		Customer customer;
 		if(!(checkParameters(request))){
 			customer = (Customer) session.getAttribute("customer");
 		}else{
-			customer = CustomerServiceImpl.getCustomer(Integer.parseInt(request.getParameter("customer")));
+			customer = customerServiceImpl.getCustomer(Integer.parseInt(request.getParameter("customer")));
 		}
 		OrderServiceImpl orderService = new OrderServiceImpl();		
 		List<Order> listOfOrder = orderService.retrieveUnpaidOrders(customer);

@@ -2,9 +2,6 @@ package com.onb.daos.impl;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.onb.daos.CustomerDAO;
-
-
 public class AbstractDAO {
 
 	private JdbcTemplate jdbcTemplate;

@@ -15,8 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.onb.domainmodel.Customer;
 import com.onb.domainmodel.Order;
-import com.onb.impl.CustomerServiceImpl;
-import com.onb.impl.OrderServiceImpl;
+import com.onb.services.impl.CustomerServiceImpl;
+import com.onb.services.impl.InventoryServiceImpl;
+import com.onb.services.impl.OrderServiceImpl;
+import com.onb.services.impl.ProductServiceImpl;
 
 
 /**
@@ -25,7 +27,11 @@ import com.onb.impl.OrderServiceImpl;
 @WebServlet("/ViewOrders")
 public class ViewOrders extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	OrderServiceImpl orderServiceImpl = new OrderServiceImpl();
+	CustomerServiceImpl customerServiceImpl = new CustomerServiceImpl();
+	ProductServiceImpl productServiceImpl = new ProductServiceImpl();
+	InventoryServiceImpl inventoryServiceImpl = new InventoryServiceImpl();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -50,7 +56,7 @@ public class ViewOrders extends HttpServlet {
 		if(!(checkParameters(request))){
 			int selectedCustomer = Integer.parseInt(request.getParameter("customer"));
 			
-			Customer customer = CustomerServiceImpl.getCustomer(selectedCustomer);
+			Customer customer = customerServiceImpl.getCustomer(selectedCustomer);
 			
 			OrderServiceImpl orderService = new OrderServiceImpl();		
 			List<Order> listOfOrder = (List<Order>) orderService.retrieveOrdersFromDB(customer);

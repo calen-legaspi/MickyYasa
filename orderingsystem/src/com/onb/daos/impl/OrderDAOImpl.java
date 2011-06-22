@@ -1,20 +1,12 @@
 package com.onb.daos.impl;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.*;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 
 import com.onb.daos.*;
 import com.onb.domainmodel.*;
 import com.onb.resultretrieval.OrderRowMapper;
-import com.onb.resultretrieval.ProductRowMapper;
-
 
 
 public class OrderDAOImpl extends AbstractDAO implements OrderDAO {
@@ -25,9 +17,9 @@ public class OrderDAOImpl extends AbstractDAO implements OrderDAO {
 		Object[] params = new Object[]{o.getOrderNumber(), o.getCustomerID(), date, 0};
 		this.getJdbcTemplate().update(sql,params);
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("config.xml");
-		OrderItemDAO orderitemDao = (OrderItemDAO)ctx.getBean("OrderItemDao");
+		OrderItemDAO orderItemDAO = (OrderItemDAO)ctx.getBean("orderItemDAO");
 		for(OrderItem item:o.getItems()){
-			orderitemDao.createOrderItem(item, o.getOrderNumber());
+			orderItemDAO.createOrderItem(item, o.getOrderNumber());
 		}
 	}
 

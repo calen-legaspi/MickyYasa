@@ -15,11 +15,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.onb.daos.*;
 import com.onb.domainmodel.*;
-import com.onb.impl.CustomerServiceImpl;
-import com.onb.impl.InventoryServiceImpl;
-import com.onb.impl.OrderServiceImpl;
-import com.onb.impl.ProductServiceImpl;
 import com.onb.services.*;
+import com.onb.services.impl.CustomerServiceImpl;
+import com.onb.services.impl.InventoryServiceImpl;
+import com.onb.services.impl.OrderServiceImpl;
+import com.onb.services.impl.ProductServiceImpl;
 
 import java.util.*;
 
@@ -29,7 +29,11 @@ import java.util.*;
 @WebServlet(description = "Servlet for Creating Orders", urlPatterns = { "/CreateOrder" })
 public class CreateOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	OrderServiceImpl orderServiceImpl = new OrderServiceImpl();
+	CustomerServiceImpl customerServiceImpl = new CustomerServiceImpl();
+	ProductServiceImpl productServiceImpl = new ProductServiceImpl();
+	InventoryServiceImpl inventoryServiceImpl = new InventoryServiceImpl();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,7 +47,7 @@ public class CreateOrder extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		List<InventoryItem> items = InventoryServiceImpl.getAllAvailableProductsInDB();
+		List<InventoryItem> items = inventoryServiceImpl.getAllAvailableProductsInDB();
 		Inventory inventory = new Inventory(items);
 		session.setAttribute("inventory", inventory);
 		RequestDispatcher view = request.getRequestDispatcher("createOrder.jsp");
@@ -55,22 +59,24 @@ public class CreateOrder extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+
+		
 		if(isDeleteButtonClicked(request.getParameter("orderIndex"))){
 			Order order = getOrder(request);
 			int itemIndex = Integer.valueOf(request.getParameter("orderIndex"));
-			OrderServiceImpl.deleteOrderItem(order, itemIndex);
+			orderServiceImpl.deleteOrderItem(order, itemIndex);
 			session.setAttribute("order", order);
 		}else if(checkParameters(request)){
-			Customer customer  = CustomerServiceImpl.getCustomer(Integer.valueOf(request.getParameter("customerid")));
+			Customer customer  = customerServiceImpl.getCustomer(Integer.valueOf(request.getParameter("customerid")));
 			if(customer !=null){
 				session.setAttribute("customer", customer);
 				Order order = getOrder(request);
 				int quantity = Integer.valueOf(request.getParameter("quantity"));
 				int productNumber = Integer.valueOf(request.getParameter("products"));
-				Product product = ProductServiceImpl.getProduct(productNumber);
+				Product product = productServiceImpl.getProduct(productNumber);
 				Inventory inventory = (Inventory)session.getAttribute("inventory");
-				InventoryItem item = InventoryServiceImpl.getInventoryItem(inventory, product);
-				if(InventoryServiceImpl.checkQuantity(item, quantity)){
+				InventoryItem item = inventoryServiceImpl.getInventoryItem(inventory, product);
+				if(inventoryServiceImpl.checkQuantity(item, quantity)){
 					inventory.deduct(item, quantity);
 					OrderItem orderItem = new OrderItem(quantity,product); 
 					order.addItem(orderItem);	
@@ -79,7 +85,7 @@ public class CreateOrder extends HttpServlet {
 			}
 		}else if(isAddOrderButtonClicked(request.getParameter("Add"))){
 			Order order = getOrder(request);	
-			OrderServiceImpl.addOrderToDB(order);
+			orderServiceImpl.addOrderToDB(order);
 			session.removeAttribute("customer");
 			session.removeAttribute("order");
 		}
@@ -93,7 +99,7 @@ public class CreateOrder extends HttpServlet {
 		Order order = (Order)session.getAttribute("order");
 		if(order == null){
 			Customer customer = (Customer)session.getAttribute("customer");
-			int orderNumber = Integer.valueOf(OrderServiceImpl.getLastOrderNumber());
+			int orderNumber = Integer.valueOf(orderServiceImpl.getLastOrderNumber());
 			return new Order(customer, orderNumber+1);
 		}else return order;	
 	}

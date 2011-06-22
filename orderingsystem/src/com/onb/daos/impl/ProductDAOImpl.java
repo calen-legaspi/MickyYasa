@@ -1,9 +1,5 @@
 package com.onb.daos.impl;
 
-import java.util.List;
-
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import com.onb.daos.ProductDAO;
 import com.onb.domainmodel.Product;
 import com.onb.resultretrieval.ProductRowMapper;
