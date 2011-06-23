@@ -14,6 +14,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import controller.*;
+import controller.impl.CustomerServiceImpl;
+import controller.impl.InventoryServiceImpl;
+import controller.impl.OrderServiceImpl;
 import dao.*;
 import domainmodel.*;
 import java.util.*;
@@ -24,6 +27,7 @@ import java.util.*;
 @WebServlet(description = "Servlet for Creating Orders", urlPatterns = { "/CreateOrder" })
 public class CreateOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private ApplicationContext applicationContext = new ClassPathXmlApplicationContext("config.xml");
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -38,7 +42,8 @@ public class CreateOrder extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		List<InventoryItem> items = InventoryService.getAllAvailableProductsInDB();
+		InventoryService inventoryservice = applicationContext.getBean("InventoryService", InventoryService.class);
+		List<InventoryItem> items = inventoryservice.getAllAvailableProductsInDB();
 		Inventory inventory = new Inventory(items);
 		session.setAttribute("inventory", inventory);
 		RequestDispatcher view = request.getRequestDispatcher("createOrder.jsp");
@@ -50,22 +55,26 @@ public class CreateOrder extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		OrderService orderservice = applicationContext.getBean("OrderService", OrderServiceImpl.class);
+		int lastOrderNumber = orderservice.getLastOrderNumber();
 		if(isDeleteButtonClicked(request.getParameter("orderIndex"))){
-			Order order = getOrder(request);
+			Order order = getOrder(request, lastOrderNumber);
 			int itemIndex = Integer.valueOf(request.getParameter("orderIndex"));
-			OrderService.deleteOrderItem(order, itemIndex);
+			orderservice.deleteOrderItem(order, itemIndex);
 			session.setAttribute("order", order);
 		}else if(checkParameters(request)){
-			Customer customer  = CustomerService.getCustomer(Integer.valueOf(request.getParameter("customerid")));
+			CustomerService customerservice = applicationContext.getBean("CustomerService",CustomerService.class);
+			Customer customer  = customerservice.getCustomer(Integer.valueOf(request.getParameter("customerid")));
 			if(customer !=null){
 				session.setAttribute("customer", customer);
-				Order order = getOrder(request);
+				Order order = getOrder(request, lastOrderNumber);
 				int quantity = Integer.valueOf(request.getParameter("quantity"));
 				int productNumber = Integer.valueOf(request.getParameter("products"));
 				Product product = ProductService.getProduct(productNumber);
 				Inventory inventory = (Inventory)session.getAttribute("inventory");
-				InventoryItem item = InventoryService.getInventoryItem(inventory, product);
-				if(InventoryService.checkQuantity(item, quantity)){
+				InventoryService inventoryservice = applicationContext.getBean("InventoryService", InventoryService.class);
+				InventoryItem item = inventoryservice.getInventoryItem(inventory, product);
+				if(inventoryservice.checkQuantity(item, quantity)){
 					inventory.deduct(item, quantity);
 					OrderItem orderItem = new OrderItem(quantity,product); 
 					order.addItem(orderItem);	
@@ -73,8 +82,8 @@ public class CreateOrder extends HttpServlet {
 				}
 			}
 		}else if(isAddOrderButtonClicked(request.getParameter("Add"))){
-			Order order = getOrder(request);	
-			OrderService.addOrderToDB(order);
+			Order order = getOrder(request, lastOrderNumber);	
+			orderservice.addOrderToDB(order);
 			session.removeAttribute("customer");
 			session.removeAttribute("order");
 		}
@@ -83,12 +92,12 @@ public class CreateOrder extends HttpServlet {
 		
 	}
 	
-	private Order getOrder(HttpServletRequest request){
+	private Order getOrder(HttpServletRequest request, int lastOrderNumber){
 		HttpSession session = request.getSession();
 		Order order = (Order)session.getAttribute("order");
 		if(order == null){
 			Customer customer = (Customer)session.getAttribute("customer");
-			int orderNumber = Integer.valueOf(OrderService.getLastOrderNumber());
+			int orderNumber = Integer.valueOf(lastOrderNumber);
 			return new Order(customer, orderNumber+1);
 		}else return order;	
 	}

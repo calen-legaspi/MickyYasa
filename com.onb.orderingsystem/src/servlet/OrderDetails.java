@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.*;
+import controller.impl.OrderServiceImpl;
 import domainmodel.*;
 
 /**
@@ -40,7 +41,7 @@ public class OrderDetails extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int selectedOrderNumber = Integer.parseInt(request.getParameter("orderIndex"));
-		OrderService orderService = new OrderService();
+		OrderService orderService = new OrderServiceImpl();
 		
 		Order order = orderService.retrieveOrderFromDB(selectedOrderNumber);
 		

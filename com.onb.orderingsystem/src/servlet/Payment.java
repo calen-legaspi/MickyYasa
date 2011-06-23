@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.CustomerService;
+import controller.impl.CustomerServiceImpl;
 import domainmodel.Customer;
 
 /**
@@ -31,7 +31,7 @@ public class Payment extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CustomerService customerService = new CustomerService();
+		CustomerServiceImpl customerService = new CustomerServiceImpl();
 		List<Customer> listOfCustomer = customerService.getCustomerWithUnpaidOrders();
 
 		request.setAttribute("listOfCustomer", listOfCustomer);		

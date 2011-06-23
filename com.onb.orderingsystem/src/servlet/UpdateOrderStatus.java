@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.OrderService;
+import controller.impl.OrderServiceImpl;
 import domainmodel.Order;
 
 /**
@@ -38,7 +39,7 @@ public class UpdateOrderStatus extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int selectedOrderNumber = Integer.parseInt(request.getParameter("orderIndex"));
 		System.out.println(selectedOrderNumber);
-		OrderService orderService = new OrderService();
+		OrderService orderService = new OrderServiceImpl();
 		
 		Order order = orderService.retrieveOrderFromDB(selectedOrderNumber);
 	

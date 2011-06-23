@@ -6,12 +6,12 @@ import java.util.List;
 
 import org.junit.Test;
 
-import controller.CustomerService;
+import controller.impl.CustomerServiceImpl;
 import domainmodel.Customer;
 
 
 public class TestCustomerService{
-	CustomerService customerService = new CustomerService();
+	CustomerServiceImpl customerService = new CustomerServiceImpl();
 	
 	@Test
 	public void testGetCustomerList(){

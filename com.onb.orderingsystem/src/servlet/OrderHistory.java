@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import controller.CustomerService;
-import controller.OrderService;
+import controller.impl.CustomerServiceImpl;
+import controller.impl.OrderServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,7 +38,7 @@ public class OrderHistory extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(!(checkParameters(request))){
-			CustomerService customerService = new CustomerService();
+			CustomerServiceImpl customerService = new CustomerServiceImpl();
 			List<Customer> listOfCustomer = customerService.getCustomerList();
 
 			request.setAttribute("listOfCustomer", listOfCustomer);		
